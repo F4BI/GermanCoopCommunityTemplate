@@ -1,0 +1,247 @@
+/*%FSM<COMPILE "C:\Program Files (x86)\Bohemia Interactive\Tools\FSM Editor Personal Edition\scriptedFSM.cfg, reduceGroups">*/
+/*%FSM<HEAD>*/
+/*
+item0[] = {"Start",0,250,-50.000000,-175.000000,50.000000,-125.000000,0.000000,"Start"};
+item1[] = {"Delay",4,218,-50.000000,-100.000000,50.000000,-50.000000,0.000000,"Delay"};
+item2[] = {"loop",2,250,-50.000000,0.000000,50.000000,50.000000,0.000000,"loop"};
+item3[] = {"reduce_groups",4,218,-50.000000,100.000000,50.000000,150.000000,0.000000,"reduce groups"};
+item4[] = {"reduce_BuildUp",2,4346,-50.000000,200.000000,50.000000,250.000000,0.000000,"reduce BuildUp"};
+item5[] = {"sleep",4,218,125.000000,200.000000,225.000000,250.000000,0.000000,"sleep"};
+item6[] = {"_",2,250,125.000000,100.000000,225.000000,150.000000,0.000000,""};
+item7[] = {"MP_check",4,218,275.000000,200.000000,375.000000,250.000000,1.000000,"MP_check"};
+item8[] = {"true",8,218,125.000000,0.000000,225.000000,50.000000,0.000000,"true"};
+item9[] = {"__1",2,250,425.000000,100.000000,525.000000,150.000000,0.000000,"" \n ""};
+item10[] = {"Delay2",4,218,275.000000,100.000000,375.000000,150.000000,0.000000,"Delay2"};
+link0[] = {0,1};
+link1[] = {1,2};
+link2[] = {2,3};
+link3[] = {3,4};
+link4[] = {4,5};
+link5[] = {5,6};
+link6[] = {6,7};
+link7[] = {6,8};
+link8[] = {7,9};
+link9[] = {8,2};
+link10[] = {9,10};
+link11[] = {10,6};
+globals[] = {25.000000,1,0,0,0,640,480,1,30,6316128,1,-224.923859,605.874695,514.290833,-257.225494,981,911,1};
+window[] = {2,-1,-1,-1,-1,818,100,1060,100,3,999};
+*//*%FSM</HEAD>*/
+class FSM
+{
+  fsmName = "reduceGroups";
+  class States
+  {
+    /*%FSM<STATE "Start">*/
+    class Start
+    {
+      name = "Start";
+      init = /*%FSM<STATEINIT""">*/"private [""_timeend""];" \n
+       "_timeend = time + 10;"/*%FSM</STATEINIT""">*/;
+      precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
+      class Links
+      {
+        /*%FSM<LINK "Delay">*/
+        class Delay
+        {
+          priority = 0.000000;
+          to="loop";
+          precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
+          condition=/*%FSM<CONDITION""">*/"time > _timeend"/*%FSM</CONDITION""">*/;
+          action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
+        };
+        /*%FSM</LINK>*/
+      };
+    };
+    /*%FSM</STATE>*/
+    /*%FSM<STATE "loop">*/
+    class loop
+    {
+      name = "loop";
+      init = /*%FSM<STATEINIT""">*/""/*%FSM</STATEINIT""">*/;
+      precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
+      class Links
+      {
+        /*%FSM<LINK "reduce_groups">*/
+        class reduce_groups
+        {
+          priority = 0.000000;
+          to="reduce_BuildUp";
+          precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
+          condition=/*%FSM<CONDITION""">*/"count ai_reduce_groups > 0"/*%FSM</CONDITION""">*/;
+          action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
+        };
+        /*%FSM</LINK>*/
+      };
+    };
+    /*%FSM</STATE>*/
+    /*%FSM<STATE "reduce_BuildUp">*/
+    class reduce_BuildUp
+    {
+      name = "reduce_BuildUp";
+      init = /*%FSM<STATEINIT""">*/"scriptName ""reduce_build_up"";" \n
+       "private [""_debug"", ""_sunits"", ""_grp"", ""_gstate"", ""_units"", ""_leader"", ""_nearplayers"", ""_ar"", ""_poslead"", ""_newu"", ""_isdefend""];" \n
+       "_debug = true;" \n
+       "" \n
+       "_sunits = if (isMultiplayer) then {playableUnits} else {switchableUnits};" \n
+       "if ai_IS_HC_CLIENT then {" \n
+       "	_sunits = _sunits - [player];" \n
+       "};" \n
+       "{" \n
+       "	_grp = _x;" \n
+       "	if (!isNull _grp) then {" \n
+       "		_gstate = _grp getVariable ""ai_gstate"";" \n
+       "		if (_gstate > 0) then {" \n
+       "			if (({alive _x} count units _grp) > 0) then {" \n
+       "				_units = units _grp;" \n
+       "				_leader = leader _grp;" \n
+       "				if (isNull _leader) then {" \n
+       "					{" \n
+       "						if (alive _x) exitWith {" \n
+       "							_leader = _x;" \n
+       "						};" \n
+       "					} forEach _units;" \n
+       "				};" \n
+       "				if (!isNull _leader && {alive _leader}) then {" \n
+       "					_nearplayers = {(vehicle _x) distance _leader <= tcb_reduce_distance} count _sunits > 0;" \n
+       "					if (_gstate == 1) then {" \n
+       "						if (!_nearplayers) then {" \n
+       "							[_grp, 2] call tcb_fnc_ai_setState;" \n
+       "							_units = _units - [_leader];" \n
+       "							_ar = [];" \n
+       "							{" \n
+       "								_ar pushBack [typeOf _x, damage _x, weapons _x, magazines _x, _x getVariable ""ai_unitcode""];" \n
+       "								if (_debug) then {" \n
+       "									player sideChat format [""Group %1, reducing %2"", _grp, _x];" \n
+       "								};" \n
+       "								deleteVehicle _x;" \n
+       "							} forEach _units;" \n
+       "							_grp setVariable [""ai_reduced_units"", _ar];" \n
+       "						};" \n
+       "					} else {" \n
+       "						if (_nearplayers) then {" \n
+       "							_ar = _grp getVariable ""ai_reduced_units"";" \n
+       "							if (!isNil ""_ar"") then {" \n
+       "								_poslead = position _leader;" \n
+       "								{" \n
+       "									_newu = _grp createUnit [_x select 0, _poslead, [], 0, ""FORM""];" \n
+       "									if (_debug) then {" \n
+       "										player sideChat format [""%Group 1, unit %2 added"", _grp, _newu];" \n
+       "									};" \n
+       "									_newu setDamage (_x select 1);" \n
+       "									removeAllWeapons _newu;" \n
+       "									removeAllItems _newu;" \n
+       "									{" \n
+       "										_newu addMagazine _x;" \n
+       "									} forEach (_x select 3);" \n
+       "									{" \n
+       "										_newu addWeapon _x;" \n
+       "									} forEach (_x select 2);" \n
+       "									_ucode = _x select 4;" \n
+       "									if (!isNil ""_ucode"") then {" \n
+       "										{" \n
+       "											[_newu, _x] call tcb_fnc_ai_setUnitCode;" \n
+       "										} forEach _ucode;" \n
+       "									};" \n
+       "									_newu setVariable [""BIS_noCoreConversations"", true];" \n
+       "									if (tcb_remove_nv) then {_newu call tcb_fnc_ai_removeNVG};" \n
+       "									if (tcb_remove_fak) then {_newu removeItem ""FirstAidKit""};" \n
+       "									[_newu] call tcb_fnc_ai_setSkill;" \n
+       "								} forEach _ar;" \n
+       " 								_isdefend = _grp getVariable ""ai_defend"";" \n
+       "								if (isNil ""_isdefend"") then {_isdefend = false};" \n
+       "								if (_isdefend) then {" \n
+       "									[_grp, _poslead] spawn tcb_fnc_ai_taskDefend;" \n
+       "								};" \n
+       "								_grp setVariable [""ai_reduced_units"", nil];" \n
+       "								[_grp, 1] call tcb_fnc_ai_setState;" \n
+       "							};" \n
+       "						};" \n
+       "					};" \n
+       "				};" \n
+       "			} else {" \n
+       "				ai_reduce_groups set [_forEachIndex, -1];" \n
+       "			};" \n
+       "		};" \n
+       "	} else {" \n
+       "		ai_reduce_groups set [_forEachIndex, -1];" \n
+       "	};" \n
+       "} forEach ai_reduce_groups;" \n
+       "ai_reduce_groups = ai_reduce_groups - [-1];" \n
+       "" \n
+       "_timeend = time + 1;"/*%FSM</STATEINIT""">*/;
+      precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
+      class Links
+      {
+        /*%FSM<LINK "sleep">*/
+        class sleep
+        {
+          priority = 0.000000;
+          to="_";
+          precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
+          condition=/*%FSM<CONDITION""">*/"time >= _timeend"/*%FSM</CONDITION""">*/;
+          action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
+        };
+        /*%FSM</LINK>*/
+      };
+    };
+    /*%FSM</STATE>*/
+    /*%FSM<STATE "_">*/
+    class _
+    {
+      name = "_";
+      init = /*%FSM<STATEINIT""">*/""/*%FSM</STATEINIT""">*/;
+      precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
+      class Links
+      {
+        /*%FSM<LINK "MP_check">*/
+        class MP_check
+        {
+          priority = 1.000000;
+          to="__1";
+          precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
+          condition=/*%FSM<CONDITION""">*/"isMultiplayer && {(call tcb_fnc_PlayersNumber) == 0}"/*%FSM</CONDITION""">*/;
+          action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
+        };
+        /*%FSM</LINK>*/
+        /*%FSM<LINK "true">*/
+        class true
+        {
+          priority = 0.000000;
+          to="loop";
+          precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
+          condition=/*%FSM<CONDITION""">*/""/*%FSM</CONDITION""">*/;
+          action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
+        };
+        /*%FSM</LINK>*/
+      };
+    };
+    /*%FSM</STATE>*/
+    /*%FSM<STATE "__1">*/
+    class __1
+    {
+      name = "__1";
+      init = /*%FSM<STATEINIT""">*/"_timeend = time + 5.21;"/*%FSM</STATEINIT""">*/;
+      precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
+      class Links
+      {
+        /*%FSM<LINK "Delay2">*/
+        class Delay2
+        {
+          priority = 0.000000;
+          to="_";
+          precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
+          condition=/*%FSM<CONDITION""">*/"time > _timeend"/*%FSM</CONDITION""">*/;
+          action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
+        };
+        /*%FSM</LINK>*/
+      };
+    };
+    /*%FSM</STATE>*/
+  };
+  initState="Start";
+  finalStates[] =
+  {
+  };
+};
+/*%FSM</COMPILE>*/
