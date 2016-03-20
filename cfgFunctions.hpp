@@ -41,6 +41,11 @@ class tcb {
 		addf(returnConfigEntry);
 		addf(returnVehicleTurret);
 		addf(checkMTShotHD);
+		addf(isCurator);
+	};
+	class server {
+		file = "core\func\server";
+		addf(addToCuratorLogics);
 	};
 	class client {
 		file = "core\func\client";
@@ -99,6 +104,37 @@ class tcb {
 		addf(ai_HCorServer);
 		addf(ai_opc);
 		addf(ai_opd);
+		addf(ai_addToCuratorLogics);
+	};
+	class far_revive {
+		file = "core\modules\far_revive\func";
+		addf(rev_playerActions);
+		addf(rev_handleDamage);
+		addf(rev_Unconcious);
+		addf(rev_HandleStabilize);
+		addf(rev_Drag);
+		addf(rev_Release);
+		addf(rev_CheckRevive);
+		addf(rev_CheckStabilize);
+		addf(rev_checkSuicide);
+		addf(rev_checkDragging);
+		addf(rev_IsFriendlyMedic);
+		addf(rev_CheckFriendlies);
+		addf(rev_createMarker);
+		addf(rev_removeMarker);
+		addf(rev_toggleTFAR);
+		addf(rev_HandleRevive);
+		addf(rev_arrayPush);
+		addf(rev_isMedic);
+		addf(rev_garbage);
+		addf(rev_medicEquipment);
+		addf(rev_progressBarInit);
+		addf(rev_progressBar);
+		addf(rev_playerInit);
+		addf(rev_reviveUI);
+		addf(rev_reviveCamera);
+		addf(rev_keyUnbind);
+		addf(rev_showKiller);
 	};
 	
 	class tcb_preinit {

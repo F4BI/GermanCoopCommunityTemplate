@@ -72,7 +72,7 @@ tcb_show_his_ass = true;
 // wer nach 3 versuchen keine Antwort hat, wird freundlich vom Server gekickt.
 // das System ist remanent, bereits passierte Spieler werden nicht nochmal gefragt, bereits gekickte Spieler kommen nicht mehr auf den Server
 // wenn "tcb_tk_only_one_chance" auf true steht.
-tcb_tk_captcha = false;
+tcb_tk_captcha = true;
 
 
 

@@ -6,7 +6,6 @@ private ["_items", "_optics", "_arifle", "_srifle", "_mg", "_handgun", "_launche
 tcb_all_items = [];
 tcb_all_weaps = [];
 
-
 // Rucksäcke, Westen,, Magazine und Brillen werden automatisch hinzugefügt. (braucht man sich nicht drum kümmern)
 // nur Waffen und besondere Gegenstände definieren (z.B. Scopes und andere Attachments usw)
 // beachte: Arsenal fügt automatisch die bereits bestehende Spielerausrüstung der Auswahl hinzu!
@@ -69,6 +68,17 @@ switch (playerSide) do {
 		_handgun = [];
 		_launcher = [];
 	};
+	default {
+	// need for virtual entities
+		_items = [];
+		_optics = [];
+
+		_arifle = [];
+		_srifle = [];
+		_mg = [];
+		_handgun = [];
+		_launcher = [];	
+	};
 };
 
 
@@ -89,6 +99,7 @@ switch (playerSide) do {
 {tcb_all_weaps append _x} forEach [_arifle, _srifle, _mg, _handgun, _launcher];
 
 // all magazines without any faction relations, ARSENAL search automaticaly for the matched ammo
+/*	<---- psycho: not needed i guess. Maybe add manually some standard mags for mg's / sniper / at - so ammo bearer can get strange ammo types for their comrades
 _cfgMags = configFile >> "CfgMagazines";
 tcb_mag_a = [];
 for "_i" from 0 to (count _cfgMags)-1 do {
@@ -100,6 +111,8 @@ for "_i" from 0 to (count _cfgMags)-1 do {
 		};
 	};
 };
+*/
+
 // all glassses without any faction relations
 _cfgglasses = configFile >> "CfgGlasses";
 _glasses_a = [];
@@ -146,12 +159,12 @@ geco_arsenal_crates = geco_arsenal_crates - [Nil];
 	["AmmoboxInit", [_x,true]] call BIS_fnc_arsenal;
 	[_x,[true]] call BIS_fnc_removeVirtualWeaponCargo;
 	[_x,[true]] call BIS_fnc_removeVirtualItemCargo;
-	[_x,[true]] call BIS_fnc_removeVirtualMagazineCargo;
+	//[_x,[true]] call BIS_fnc_removeVirtualMagazineCargo;
 	[_x,[true]] call BIS_fnc_removeVirtualBackpackCargo;
 	
 	[_x, tcb_all_weaps] call BIS_fnc_addVirtualWeaponCargo;
 	[_x, tcb_bp_a] call BIS_fnc_addVirtualBackpackCargo;
 	[_x, tcb_all_items] call BIS_fnc_addVirtualItemCargo;
-	[_x, tcb_mag_a] call BIS_fnc_addVirtualMagazineCargo;
+	//[_x, tcb_mag_a] call BIS_fnc_addVirtualMagazineCargo;
 
 } forEach geco_arsenal_crates;

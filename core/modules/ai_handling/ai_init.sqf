@@ -1,7 +1,6 @@
 // by psycho
 if (!isServer && {!ai_IS_HC_CLIENT}) exitWith {};
 #include "ai_macros.sqf"
-AI_H_PATH = "core\modules\ai_handling\";
 
 __aiccppfln(main_fn.sqf);
 
@@ -46,13 +45,6 @@ _m setMarkerTypeLocal "waypoint";
 _m setMarkerColorLocal "ColorRed";
 _m setMarkerTextLocal "MapCenter";
 #endif
-
-ai_zeus_logic = objNull;
-if (!isNil "tcb_gamemaster") then {
-	if (!isNull tcb_gamemaster) then {
-		ai_zeus_logic = tcb_gamemaster;
-	};
-};
 
 // blufor, opfor, indfor
 ai_vec_spawn_default_Crew = ["B_crew_F", "O_crew_F", "I_crew_F"];
@@ -134,16 +126,21 @@ ai_mech_G = [
 //--------------------tank sections and platoons
 ai_section_E = [
 	["East","OPF_F","Armored","OIA_TankSection"] call tcb_fnc_ai_getConfigGroup,
-	["East","OPF_F","Armored","OIA_SPGSection_Scorcher"] call tcb_fnc_ai_getConfigGroup,
+	//["East","OPF_F","Armored","OIA_SPGSection_Scorcher"] call tcb_fnc_ai_getConfigGroup,
+	["O_APC_Tracked_02_cannon_F","O_APC_Wheeled_02_rcws_F"],	// manual defined APC section
 	["East","OPF_F","Armored","OIA_TankPlatoon_AA"] call tcb_fnc_ai_getConfigGroup
 ];
 ai_section_W = [
 	["West","BLU_F","Armored","BUS_TankSection"] call tcb_fnc_ai_getConfigGroup,
-	["West","BLU_F","Armored","BUS_SPGSection_Scorcher"] call tcb_fnc_ai_getConfigGroup,
+	//["West","BLU_F","Armored","BUS_SPGSection_Scorcher"] call tcb_fnc_ai_getConfigGroup,
+	["B_APC_Tracked_01_rcws_F","B_APC_Wheeled_01_cannon_F"],	// manual defined APC section
 	["West","BLU_F","Armored","BUS_TankPlatoon_AA"] call tcb_fnc_ai_getConfigGroup
 ];
 ai_section_G = [
-	["dummy"]
+	["Indep","IND_F","Armored","HAF_TankSection"] call tcb_fnc_ai_getConfigGroup,
+	//["Indep","IND_F","Armored","BUS_SPGSection_Scorcher"] call tcb_fnc_ai_getConfigGroup,
+	["I_APC_tracked_03_cannon_F","I_APC_Wheeled_03_cannon_F"],	// manual defined APC section
+	["Indep","IND_F","Armored","HAF_TankPlatoon_AA"] call tcb_fnc_ai_getConfigGroup
 ];
 
 ai_veh_a_E = [
@@ -175,10 +172,10 @@ ai_veh_a_W = [
 	["B_Truck_01_ammo_F"]
 ];
 ai_veh_a_G = [
-	[""],
-	[""],
+	["I_MBT_03_cannon_F"],
+	["I_APC_tracked_03_cannon_F"],
 	["I_APC_Wheeled_03_cannon_F"],
-	[""],
+	["I_APC_tracked_03_cannon_F"],
 	["I_MRAP_03_hmg_F","I_MRAP_03_gmg_F"],
 	["I_MRAP_03_F"],
 	["I_GMG_01_F","I_GMG_01_high_F","I_GMG_01_A_F","I_HMG_01_F","I_HMG_01_high_F","I_HMG_01_A_F"],

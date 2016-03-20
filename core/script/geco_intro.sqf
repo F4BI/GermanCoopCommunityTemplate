@@ -49,13 +49,20 @@ sleep 1;
 _mName = "";
 _mName = getText (missionConfigFile >> "MissionSQM" >> "Mission">> "Intel" >> "briefingName");
 if (_mName == "") then {
-	_mName = getMissionConfigValue ["onLoadName", "M-Name not Defined!"];
+	_mName = getMissionConfigValue ["onLoadName", "M-Name not defined!"];
 };
-_mAuthor = getMissionConfigValue ["author", "M-Author not Defined!"];
+_mAuthor = getMissionConfigValue ["author", "M-Author not defined!"];
 [parseText format [ "<t align='right' size='1.2'><t font='PuristaBold' size='1.6'>""%1""</t><br/>%2</t>", _mName, "made by: " + _mAuthor], true, nil, 7, 0.7, 0] spawn BIS_fnc_textTiles;
 
 setViewDistance _viewDistance;
 
+if (player call tcb_fnc_isCurator) then {
+	_isAdmin = if (serverCommandAvailable "#shutdown") then {true} else {false};
+	if (!_isAdmin && !isServer) then {
+		openCuratorInterface;
+	};
+};
+
 sleep 3;
-intro_done = true;
+geco_intro_done = true;
 enableSaving [false, false];

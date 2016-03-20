@@ -1,16 +1,16 @@
 //by psycho
-private ["_player_obj"];
+private ["_player_obj", "_corpse"];
 _player_obj = _this select 0;
+_corpse = _this select 1;
 
-if (!isNil "tcb_gamemaster") then {
-	if (!isNull tcb_gamemaster) then {
-		["addToCurator", _player_obj] call tcb_fnc_netCallEventCTS;
-		
-		_old_objects = tcb_gamemaster getVariable "tcb_zeus";
-		if (getplayerUID _player_obj == _old_objects select 1) then {
-			[_player_obj, _old_objects select 0] call BIS_fnc_curatorRespawn;
-		};
-	};
+// search config for curator, if yes -> server set curator respawn
+if (player call BIS_fnc_isCurator) then {
+	["resetCurator", _player_obj, _corpse] call tcb_fnc_netCallEventCTS;
+};
+
+// search for existing curator logics and add player to them
+if (count allCurators > 0) then {
+	["addToCuratorLogics", _player_obj] call tcb_fnc_netCallEventCTS;
 };
 
 [] spawn {

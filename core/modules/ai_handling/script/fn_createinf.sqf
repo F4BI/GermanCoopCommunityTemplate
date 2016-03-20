@@ -1,13 +1,16 @@
 // by Xeno
 // strongly changed by psycho
 #include "ai_macros.sqf"
-private ["_patrol_radius","_side","_radius","_pos","_task","_newgroup","_units","_pos_center","_do_patrol","_ret_grps","_special_task","_toCall","_respawns","_respawn_pos","_unit_array","_cnt","_cnt_again","_attack_pos"];
+private ["_patrol_radius","_pos","_newgroup","_do_patrol","_ret_grps","_special_task","_toCall","_respawns","_respawn_pos","_unit_array","_cnt","_cnt_again","_attack_pos"];
 
-_grp_type = _this select 0;
-_task = _this select 1;
-_radius = _this select 2;
-_pos_center = _this select 3;
-_side = _this select 4;
+params [
+	["_grp_type", "basic", [""], 0],
+	["_task", "PATROL", [[],""], 1],
+	["_radius", 100, [0], 2],
+	"_pos_center",
+	["_side", tcb_enemy, [], 4]
+];
+
 _do_patrol = if (_radius < 50) then {false} else {true};
 _special_task = if (typeName _task == "ARRAY") then {true} else {false};
 
@@ -39,17 +42,17 @@ diag_log format ["-------------createInf filtered Unit Array: %1", _unit_array];
 
 _toCall = tcb_fnc_ai_GetRanPointCircle;
 if (_special_task) then {
-	if (count _task > 2) then {
+	if (count _task > 2) then {		// raspawn task with defined spawn pos
 		_pos = switch (typeName (_task select 2)) do {
 			case "STRING" : {getMarkerPos (_task select 2)};
 			case "ARRAY" : {(_task select 2)};
 			case "OBJECT" : {getPos (_task select 2)};
 		};
 	} else {
-		_toCall = tcb_fnc_ai_GetRanPointCircleOuter;
+		_toCall = tcb_fnc_ai_GetRanPointCircleOuter;	// attack task
 	};
 } else {
-	_toCall = tcb_fnc_ai_GetRanPointCircle;
+	_toCall = if (toUpper(_task) == "ATTACK") then {tcb_fnc_ai_GetRanPointCircleOuter} else {tcb_fnc_ai_GetRanPointCircle};
 };
 if (_radius > 50) then {
 	if (count _pos == 0) then {
@@ -62,9 +65,21 @@ if (_radius > 50) then {
 	_pos = _pos_center;
 };
 
+
+
 _units = [_pos, _unit_array select 0, _newgroup] call tcb_fnc_ai_makemgroup;	//Attention! can return staged array: [unit1,unit2,[vehicle1,crewArray]]
 _newgroup allowFleeing tcb_cowardice;
-ai_zeus_logic addCuratorEditableObjects [units _newgroup,false];
+
+// add to curator if existing and check the locality
+if (count allCurators > 0) then {
+	if (isServer) then {
+		{[_x] call tcb_fnc_ai_addToCuratorLogics} forEach (units _newgroup);
+	} else {	// headless client
+		{["addToCuratorLogics", _x] call tcb_fnc_netCallEventCTS} forEach (units _newgroup);
+	};
+};
+
+
 
 if (_special_task) then {
 	if (toUpper(_task select 0) == "RESPAWN") then {
@@ -75,8 +90,9 @@ if (_special_task) then {
 			_respawn_pos = [];
 		};
 		[_newgroup, _pos_center] spawn tcb_fnc_ai_taskDefend;
-		[_grp_type, _respawns, _pos_center, _radius, _newgroup, _respawn_pos] execFSM (AI_H_PATH + "fsm\SpawnNewGroup.fsm");
-	} else {	//ATTACK
+		_respawn_delay = if (count _task > 3) then {_task select 3} else {60};
+		[_grp_type, _respawns, _pos_center, _radius, _newgroup, _respawn_pos, _respawn_delay] execFSM (AI_H_PATH + "fsm\SpawnNewGroup.fsm");
+	} else {	//ATTACK array
 		if (count _task > 1) then {
 			_attack_pos = switch (typeName (_task select 1)) do {
 				case "STRING" : {getMarkerPos (_task select 1)};
@@ -90,6 +106,11 @@ if (_special_task) then {
 		[_newgroup, _attack_pos, "this call tcb_fnc_ai_followingTask"] call tcb_fnc_ai_attackWP;
 	};
 } else {
+	if (toUpper(_task) == "ATTACK") then {		// simple ATTACK task
+		{_x setVariable ["ai_attackStore", [_patrol_radius, "this call tcb_fnc_ai_grmakesearch"]]} forEach (units _newgroup);
+		[_newgroup, _pos_center, "this call tcb_fnc_ai_followingTask"] call tcb_fnc_ai_attackWP;
+	};
+	
 	if (toUpper(_task) == "DEFEND") then {
 		_newgroup setVariable ["ai_defend", true];
 		[_newgroup, _pos_center] spawn tcb_fnc_ai_taskDefend;
@@ -113,10 +134,13 @@ if (_special_task) then {
 		};
 	};
 };
+
 _ret_grps pushBack _newgroup;
+
 
 if (tcb_doRespawnGroups) then {
 	ai_reduce_groups pushBack _newgroup;
 };
+
 
 _ret_grps
