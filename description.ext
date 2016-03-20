@@ -1,6 +1,6 @@
-//author = "Psychobastard";			<--- can set in Eden editor mor comfortable
-//onLoadName = "GeCo Template";			<--- can set in Eden editor mor comfortable
-//onLoadMission = "GeCo Base Template with most standard functionality";			<--- can set in Eden editor mor comfortable
+author = "Psychobastard";
+onLoadName = "GeCo Template";
+onLoadMission = "GeCo Base Template with most standard functionality";
 loadScreen = "core\img\geco_logo.paa";
 onLoadIntroTime = 0;
 onLoadMissionTime = 0;
@@ -68,7 +68,6 @@ class MissionSQM {
 #include "core\dialogs\rscBasicDefines.hpp"
 #include "core\dialogs\rscTitles.hpp"
 #include "core\modules\taw_vd\GUI.h"
-#include "core\modules\far_revive\far_blackscreen.hpp"
 
 class CfgDebriefing {
 	class End1 {

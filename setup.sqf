@@ -27,7 +27,6 @@ tcb_p_entities = [
 	["delta_lead","Delta","b_inf"],
 	["echo_lead","Echo","b_support"],
 	["foxtrot_lead","Foxtrot","b_support"],
-	["golf_lead","Golf","b_support"],
 	["adler_1","Adler 1","b_air"],
 	["adler_2","Adler 2","b_air"],
 	["adler_3","Adler 3","b_air"],
@@ -70,12 +69,8 @@ geco_arsenal_crates = [
 	geco_box_2
 ];
 
-// wenn nicht auskommentiert mit // wird ein integriertes Revive System geladen - deaktivieren wenn ein eigenes/anderes System verwendet werden soll
-// wenn aktiviert dann:
-// 	können nur Medics reviven
-//	Zeit zum Revive: 6 Minuten
-//	Standard Einstellungen des Revive System können wenn gewünscht im Modul 	far_revive\far_revive_init.sqf 	angepasst werden
-#define __GECO_DEFAULT_REVIVE_SYSTEM__
+
+
 
 
 
@@ -99,7 +94,7 @@ tcb_crew = ["I_crew_F","O_crew_F","B_crew_F"];
 
 //-------------------------------------------------------------------------- AI Settings --------------------------------------------------------------------------
 // main enemy side (east, west, resistance)
-tcb_enemy = opfor;
+tcb_enemy = resistance;
 
 // if true, unit hasn't  NVGoggles
 tcb_remove_nv = false;

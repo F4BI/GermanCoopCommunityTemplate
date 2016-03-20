@@ -1,4 +1,4 @@
-/*%FSM<COMPILE "Z:\Programme\Steam\SteamApps\common\Arma 3 Tools\FSMEditor\scriptedFSM.cfg, SpawnNewGroup">*/
+/*%FSM<COMPILE "C:\Program Files (x86)\Bohemia Interactive\Tools\FSM Editor Personal Edition\scriptedFSM.cfg, SpawnNewGroup">*/
 /*%FSM<HEAD>*/
 /*
 item0[] = {"Start",0,250,-50.000000,-175.000000,50.000000,-125.000000,0.000000,"Start"};
@@ -13,7 +13,7 @@ item8[] = {"no_respawn_left",4,218,425.000000,25.000000,525.000000,75.000000,1.0
 item9[] = {"limit_reached",1,250,425.000000,-175.000000,525.000000,-125.000000,0.000000,"limit reached"};
 item10[] = {"Delay_until_reps",2,250,275.000000,200.000000,375.000000,250.000000,0.000000,"Delay until repsawn"};
 item11[] = {"Delay2",4,218,275.000000,100.000000,375.000000,150.000000,0.000000,"Delay2"};
-item12[] = {"repsawn",2,4346,275.000000,25.000000,375.000000,75.000000,0.000000,"repsawn"};
+item12[] = {"repsawn",2,250,275.000000,25.000000,375.000000,75.000000,0.000000,"repsawn"};
 link0[] = {0,1};
 link1[] = {1,2};
 link2[] = {2,3};
@@ -28,191 +28,175 @@ link10[] = {10,11};
 link11[] = {11,12};
 link12[] = {12,5};
 link13[] = {12,8};
-globals[] = {0.000000,0,0,0,0,640,480,1,42,6316128,1,-292.029633,688.127930,499.105133,-468.309296,923,884,1};
-window[] = {2,-1,-1,-32000,-32000,874,156,1116,156,3,941};
+globals[] = {25.000000,1,0,0,0,640,480,1,42,6316128,1,-292.029633,688.127930,499.105133,-468.309296,923,911,1};
+window[] = {2,-1,-1,-1,-1,768,50,1010,50,3,941};
 *//*%FSM</HEAD>*/
 class FSM
 {
-        fsmName = "SpawnNewGroup";
-        class States
+  fsmName = "SpawnNewGroup";
+  class States
+  {
+    /*%FSM<STATE "Start">*/
+    class Start
+    {
+      name = "Start";
+      init = /*%FSM<STATEINIT""">*/"private [""_radius"",""_grp_type"",""_respawns"",""_respawn_pos"",""_pos_center"",""_group""];" \n
+       "_timenow = time + 20;" \n
+       "" \n
+       "_grp_type = _this select 0;" \n
+       "_respawns = _this select 1;" \n
+       "_pos_center = _this select 2;" \n
+       "_radius = _this select 3;" \n
+       "_group = _this select 4;" \n
+       "_respawn_pos = _this select 5;" \n
+       "" \n
+       "_task = if (count _respawn_pos <= 0) then {" \n
+       "	[""ATTACK"", _pos_center]" \n
+       "} else {" \n
+       "	[""ATTACK"", _pos_center, _respawn_pos]" \n
+       "};"/*%FSM</STATEINIT""">*/;
+      precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
+      class Links
+      {
+        /*%FSM<LINK "Delay">*/
+        class Delay
         {
-                /*%FSM<STATE "Start">*/
-                class Start
-                {
-                        name = "Start";
-                        itemno = 0;
-                        init = /*%FSM<STATEINIT""">*/"private [""_radius"",""_grp_type"",""_respawns"",""_respawn_pos"",""_pos_center"",""_group"",""_respawn_delay"",""_side""];" \n
-                         "_timenow = time + 20;" \n
-                         "" \n
-                         "_grp_type = _this select 0;" \n
-                         "_respawns = _this select 1;" \n
-                         "_pos_center = _this select 2;" \n
-                         "_radius = _this select 3;" \n
-                         "_group = _this select 4;" \n
-                         "_respawn_pos = _this select 5;" \n
-                         "_respawn_delay = _this select 6;" \n
-                         "" \n
-                         "_task = if (count _respawn_pos <= 0) then {" \n
-                         "	[""ATTACK"", _pos_center]" \n
-                         "} else {" \n
-                         "	[""ATTACK"", _pos_center, _respawn_pos]" \n
-                         "};" \n
-                         "" \n
-                         "_side = side _group;"/*%FSM</STATEINIT""">*/;
-                        precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
-                        class Links
-                        {
-                                /*%FSM<LINK "Delay">*/
-                                class Delay
-                                {
-                                        itemno = 1;
-                                        priority = 0.000000;
-                                        to="Loop";
-                                        precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
-                                        condition=/*%FSM<CONDITION""">*/"time > _timenow"/*%FSM</CONDITION""">*/;
-                                        action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
-                                };
-                                /*%FSM</LINK>*/
-                        };
-                };
-                /*%FSM</STATE>*/
-                /*%FSM<STATE "Loop">*/
-                class Loop
-                {
-                        name = "Loop";
-                        itemno = 2;
-                        init = /*%FSM<STATEINIT""">*/"_timenow2 = time + 2.32;"/*%FSM</STATEINIT""">*/;
-                        precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
-                        class Links
-                        {
-                                /*%FSM<LINK "grpEmpty">*/
-                                class grpEmpty
-                                {
-                                        itemno = 3;
-                                        priority = 1.000000;
-                                        to="counter";
-                                        precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
-                                        condition=/*%FSM<CONDITION""">*/"count (units _group) <= 0"/*%FSM</CONDITION""">*/;
-                                        action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
-                                };
-                                /*%FSM</LINK>*/
-                                /*%FSM<LINK "Delay">*/
-                                class Delay
-                                {
-                                        itemno = 6;
-                                        priority = 0.000000;
-                                        to="Loop";
-                                        precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
-                                        condition=/*%FSM<CONDITION""">*/"time > _timenow2"/*%FSM</CONDITION""">*/;
-                                        action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
-                                };
-                                /*%FSM</LINK>*/
-                        };
-                };
-                /*%FSM</STATE>*/
-                /*%FSM<STATE "counter">*/
-                class counter
-                {
-                        name = "counter";
-                        itemno = 4;
-                        init = /*%FSM<STATEINIT""">*/"_respawns = _respawns - 1;"/*%FSM</STATEINIT""">*/;
-                        precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
-                        class Links
-                        {
-                                /*%FSM<LINK "check">*/
-                                class check
-                                {
-                                        itemno = 7;
-                                        priority = 1.000000;
-                                        to="Delay_until_reps";
-                                        precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
-                                        condition=/*%FSM<CONDITION""">*/"_respawns > 0"/*%FSM</CONDITION""">*/;
-                                        action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
-                                };
-                                /*%FSM</LINK>*/
-                        };
-                };
-                /*%FSM</STATE>*/
-                /*%FSM<STATE "limit_reached">*/
-                class limit_reached
-                {
-                        name = "limit_reached";
-                        itemno = 9;
-                        init = /*%FSM<STATEINIT""">*/""/*%FSM</STATEINIT""">*/;
-                        precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
-                        class Links
-                        {
-                        };
-                };
-                /*%FSM</STATE>*/
-                /*%FSM<STATE "Delay_until_reps">*/
-                class Delay_until_reps
-                {
-                        name = "Delay_until_reps";
-                        itemno = 10;
-                        init = /*%FSM<STATEINIT""">*/"_timenow2 = time + _respawn_delay;"/*%FSM</STATEINIT""">*/;
-                        precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
-                        class Links
-                        {
-                                /*%FSM<LINK "Delay2">*/
-                                class Delay2
-                                {
-                                        itemno = 11;
-                                        priority = 0.000000;
-                                        to="repsawn";
-                                        precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
-                                        condition=/*%FSM<CONDITION""">*/"time > _timenow2"/*%FSM</CONDITION""">*/;
-                                        action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
-                                };
-                                /*%FSM</LINK>*/
-                        };
-                };
-                /*%FSM</STATE>*/
-                /*%FSM<STATE "repsawn">*/
-                class repsawn
-                {
-                        name = "repsawn";
-                        itemno = 12;
-                        init = /*%FSM<STATEINIT""">*/"if (_grp_type in [""basic"",""specops"",""motor_basic"",""motor_at"",""motor_aa"",""mech_basic"",""mech_at"",""mech_aa"",""mech_support""]) then {" \n
-                         "	[_grp_type, _task, _radius, _pos_center, _side] spawn tcb_fnc_ai_createInf;" \n
-                         "} else {" \n
-                         "	[_grp_type, _task, _radius, _pos_center, 1, _side] spawn tcb_fnc_ai_createArmor;" \n
-                         "};" \n
-                         "" \n
-                         "_timenow = time + 60;"/*%FSM</STATEINIT""">*/;
-                        precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
-                        class Links
-                        {
-                                /*%FSM<LINK "no_respawn_left">*/
-                                class no_respawn_left
-                                {
-                                        itemno = 8;
-                                        priority = 1.000000;
-                                        to="limit_reached";
-                                        precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
-                                        condition=/*%FSM<CONDITION""">*/"_respawns <= 0"/*%FSM</CONDITION""">*/;
-                                        action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
-                                };
-                                /*%FSM</LINK>*/
-                                /*%FSM<LINK "Delay">*/
-                                class Delay
-                                {
-                                        itemno = 1;
-                                        priority = 0.000000;
-                                        to="Loop";
-                                        precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
-                                        condition=/*%FSM<CONDITION""">*/"time > _timenow"/*%FSM</CONDITION""">*/;
-                                        action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
-                                };
-                                /*%FSM</LINK>*/
-                        };
-                };
-                /*%FSM</STATE>*/
+          priority = 0.000000;
+          to="Loop";
+          precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
+          condition=/*%FSM<CONDITION""">*/"time > _timenow"/*%FSM</CONDITION""">*/;
+          action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
         };
-        initState="Start";
-        finalStates[] =
+        /*%FSM</LINK>*/
+      };
+    };
+    /*%FSM</STATE>*/
+    /*%FSM<STATE "Loop">*/
+    class Loop
+    {
+      name = "Loop";
+      init = /*%FSM<STATEINIT""">*/"_timenow2 = time + 2.32;"/*%FSM</STATEINIT""">*/;
+      precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
+      class Links
+      {
+        /*%FSM<LINK "grpEmpty">*/
+        class grpEmpty
         {
-                "limit_reached",
+          priority = 1.000000;
+          to="counter";
+          precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
+          condition=/*%FSM<CONDITION""">*/"count (units _group) <= 0"/*%FSM</CONDITION""">*/;
+          action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
         };
+        /*%FSM</LINK>*/
+        /*%FSM<LINK "Delay">*/
+        class Delay
+        {
+          priority = 0.000000;
+          to="Loop";
+          precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
+          condition=/*%FSM<CONDITION""">*/"time > _timenow2"/*%FSM</CONDITION""">*/;
+          action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
+        };
+        /*%FSM</LINK>*/
+      };
+    };
+    /*%FSM</STATE>*/
+    /*%FSM<STATE "counter">*/
+    class counter
+    {
+      name = "counter";
+      init = /*%FSM<STATEINIT""">*/"_respawns = _respawns - 1;"/*%FSM</STATEINIT""">*/;
+      precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
+      class Links
+      {
+        /*%FSM<LINK "check">*/
+        class check
+        {
+          priority = 1.000000;
+          to="Delay_until_reps";
+          precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
+          condition=/*%FSM<CONDITION""">*/"_respawns > 0"/*%FSM</CONDITION""">*/;
+          action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
+        };
+        /*%FSM</LINK>*/
+      };
+    };
+    /*%FSM</STATE>*/
+    /*%FSM<STATE "limit_reached">*/
+    class limit_reached
+    {
+      name = "limit_reached";
+      init = /*%FSM<STATEINIT""">*/""/*%FSM</STATEINIT""">*/;
+      precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
+      class Links
+      {
+      };
+    };
+    /*%FSM</STATE>*/
+    /*%FSM<STATE "Delay_until_reps">*/
+    class Delay_until_reps
+    {
+      name = "Delay_until_reps";
+      init = /*%FSM<STATEINIT""">*/"_timenow2 = time + 160;"/*%FSM</STATEINIT""">*/;
+      precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
+      class Links
+      {
+        /*%FSM<LINK "Delay2">*/
+        class Delay2
+        {
+          priority = 0.000000;
+          to="repsawn";
+          precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
+          condition=/*%FSM<CONDITION""">*/"time > _timenow2"/*%FSM</CONDITION""">*/;
+          action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
+        };
+        /*%FSM</LINK>*/
+      };
+    };
+    /*%FSM</STATE>*/
+    /*%FSM<STATE "repsawn">*/
+    class repsawn
+    {
+      name = "repsawn";
+      init = /*%FSM<STATEINIT""">*/"if (_grp_type in [""basic"",""specops"",""motor_basic"",""motor_at"",""motor_aa"",""mech_basic"",""mech_at"",""mech_aa"",""mech_support""]) then {" \n
+       "	[_grp_type, _task, _radius, _pos_center] spawn tcb_fnc_ai_createInf;" \n
+       "} else {" \n
+       "	[_grp_type, _task, _a_radius, _center, 1] execVM (AI_H_PATH+""script\fn_createArmor.sqf"");" \n
+       "};" \n
+       "" \n
+       "_timenow = time + 30;"/*%FSM</STATEINIT""">*/;
+      precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
+      class Links
+      {
+        /*%FSM<LINK "no_respawn_left">*/
+        class no_respawn_left
+        {
+          priority = 1.000000;
+          to="limit_reached";
+          precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
+          condition=/*%FSM<CONDITION""">*/"_respawns <= 0"/*%FSM</CONDITION""">*/;
+          action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
+        };
+        /*%FSM</LINK>*/
+        /*%FSM<LINK "Delay">*/
+        class Delay
+        {
+          priority = 0.000000;
+          to="Loop";
+          precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
+          condition=/*%FSM<CONDITION""">*/"time > _timenow"/*%FSM</CONDITION""">*/;
+          action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
+        };
+        /*%FSM</LINK>*/
+      };
+    };
+    /*%FSM</STATE>*/
+  };
+  initState="Start";
+  finalStates[] =
+  {
+    "limit_reached",
+  };
 };
 /*%FSM</COMPILE>*/

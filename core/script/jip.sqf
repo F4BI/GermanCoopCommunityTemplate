@@ -7,6 +7,24 @@ if (ai_IS_HC_CLIENT) exitWith {
 	call compile preprocessFileLineNumbers (AI_H_PATH+"setupHC.sqf");
 };
 
+_curators = [];
+_curators = call BIS_fnc_listCuratorPlayers;
+if (!isNil "TCB_CURATOR") then {
+	if (!isNull TCB_CURATOR) then {
+		if (player in _curators && {str(player) == "TCB_CURATOR"}) then {
+			_logic = getAssignedCuratorLogic player;
+			_logic addCuratorPoints 1;
+			_logic setVariable ["tcb_zeus", [player, getplayerUID player], true];
+			0 spawn {
+				waitUntil {!isNil "intro_done"};
+				openCuratorInterface;
+			};
+		};
+	};
+};
+
+//["addToCurator", player] call tcb_fnc_netCallEventCTS;
+
 private ["_strp", "_i"];
 _strp = str(player);
 tcb_respawns = 0;
@@ -70,14 +88,6 @@ if (isNil "geco_not_only_crew") then {
 
 if (!isNil "geco_intro") then {
 	execVM "core\script\geco_intro.sqf";
-} else {
-	geco_intro_done = true;
-	if (player call tcb_fnc_isCurator) then {
-		_isAdmin = if (serverCommandAvailable "#shutdown") then {true} else {false};
-		if (!_isAdmin && !isServer) then {
-			openCuratorInterface;
-		};
-	};
 };
 
 waitUntil {!isNull (findDisplay 46)};

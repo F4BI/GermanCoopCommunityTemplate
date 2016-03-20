@@ -76,8 +76,20 @@ geco_not_only_crew = true;
 call compile preprocessFileLineNumbers "core\script\arsenal_preset.sqf";
 #endif
 
+
 _num = getMissionConfigValue ["respawndelay", 999];
 missionNamespace setVariable ["geco_respawndelay", _num];
+
+// checking for failed player init
+if (isMultiplayer && !isServer) then {	// only on dedicated environment
+	true spawn {
+		private "_puid";
+		waitUntil {player == player && local player};
+		_puid = getPlayerUID player;
+		if (isNil _puid) exitWith {diag_log "UID is Nil - init stoped"; endMission "LOSER";};
+		if (_uid == "") exitWith {diag_log "UID is empty - init stoped"; endMission "LOSER";};
+	};
+};
 
 geco_killcam_quotes = [
 	[(localize "STR_QUOTE_1"),(localize "STR_AUTHOR_1")],

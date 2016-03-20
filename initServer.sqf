@@ -13,20 +13,20 @@ if (isDedicated) then {
 				ai_HC_CLIENT_OBJ = HC_AI_UNIT;
 				ai_HC_CLIENT_OBJ_NAME = name HC_AI_UNIT;
 				diag_log format ["HC Object: %1 -----------  HC Name: %2",ai_HC_CLIENT_OBJ,ai_HC_CLIENT_OBJ_NAME];
+				0 spawn {
+					waitUntil {time > 3 || !isNil "tcb_MissionEndNumUnits"};
+					if (!isNil "tcb_MissionEndNumUnits") then {
+						tcb_MissionEndNumUnits = tcb_MissionEndNumUnits - 1;
+						publicVariable "tcb_MissionEndNumUnits";
+					};
+				};
 			};
 		};
 	};
 };
 
-// Zeus support
-{
-	_x addCuratorEditableObjects [(allMissionObjects "Thing"), false];
-	_x addCuratorEditableObjects [(allMissionObjects "AllVehicles"), true];
-	_x addCuratorEditableObjects [(allMissionObjects "Building"), false];
-	_x addCuratorEditableObjects [(entities "CAManBase"), false];
-	_x removeCuratorEditableObjects [(allMissionObjects "Static"), false];
-	false
-} count allCurators;
+tcb_num_players_dead = 0;
+[[0,0,0], [0,0,0, false],["NONE", "PRESENT", false], ["isServer && (time > 1) && isMultiplayer && (tcb_num_players_dead >= count playableUnits) && (count playableUnits != 0)","['tcb_auto_end_looser',[0]] call XNetCallEvent;",""]] call tcb_fnc_CreateTrigger;
 
 {_x setvariable ["BIS_nocoreconversations",true]} foreach playableUnits;
 
