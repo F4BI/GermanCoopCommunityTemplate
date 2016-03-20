@@ -13,8 +13,6 @@ tcb_grey = "#f0bfbfbf";
 AI_H_PATH = "core\modules\ai_handling\";
 TK_PATH = "core\modules\tk_protection\";
 
-call compileFinal preprocessFileLineNumbers (TK_PATH +"tk_init.sqf");
-
 if (!isDedicated) then {
 	client_jip_init_trigger = createTrigger ["EmptyDetector", [0,0,0]];
 	client_jip_init_trigger setTriggerArea [0,0,0,false];

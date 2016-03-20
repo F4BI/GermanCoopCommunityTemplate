@@ -20,18 +20,18 @@ switch (_grptype) do {
 	case "basic": {_list = missionNamespace getVariable format ["ai_allmen_%1",_side_char];_unitliste = _list call tcb_fnc_RandomArrayVal};
 	case "specops": {_list = missionNamespace getVariable format ["ai_allmen_%1",_side_char];_unitliste = _list call tcb_fnc_RandomArrayVal};
 	
-	case "motor_basic": {_list = (missionNamespace getVariable format ["ai_mot_%1", _side_char]) select 0;_unitliste = _list;};
-	case "motor_at": {_list = (missionNamespace getVariable format ["ai_mot_%1", _side_char]) select 1;_unitliste = _list;};
-	case "motor_aa": {_list = (missionNamespace getVariable format ["ai_mot_%1", _side_char]) select 2;_unitliste = _list;};
+	case "motor_basic": {_list = (missionNamespace getVariable format ["ai_mot_%1", _side_char]) select 0;_unitliste = _list};
+	case "motor_at": {_list = (missionNamespace getVariable format ["ai_mot_%1", _side_char]) select 1;_unitliste = _list};
+	case "motor_aa": {_list = (missionNamespace getVariable format ["ai_mot_%1", _side_char]) select 2;_unitliste = _list};
 
-	case "mech_basic": {_list = (missionNamespace getVariable format ["ai_mech_%1", _side_char]) select 0;_unitliste = _list;};
-	case "mech_at": {_list = (missionNamespace getVariable format ["ai_mech_%1", _side_char]) select 1;_unitliste = _list;};
-	case "mech_aa": {_list = (missionNamespace getVariable format ["ai_mech_%1", _side_char]) select 2;_unitliste = _list;};
-	case "mech_support": {_list = (missionNamespace getVariable format ["ai_mech_%1", _side_char]) select 3;_unitliste = _list;};
+	case "mech_basic": {_list = (missionNamespace getVariable format ["ai_mech_%1", _side_char]) select 0;_unitliste = _list};
+	case "mech_at": {_list = (missionNamespace getVariable format ["ai_mech_%1", _side_char]) select 1;_unitliste = _list};
+	case "mech_aa": {_list = (missionNamespace getVariable format ["ai_mech_%1", _side_char]) select 2;_unitliste = _list};
+	case "mech_support": {_list = (missionNamespace getVariable format ["ai_mech_%1", _side_char]) select 3;_unitliste = _list};
 
-	case "tank_section": {_list = (missionNamespace getVariable format ["ai_section_%1", _side_char]) select 0;_unitliste = _list;};
-	case "apc_section": {_list = (missionNamespace getVariable format ["ai_section_%1", _side_char]) select 1;_unitliste = _list;};
-	case "tank_apc_platoon": {_list = (missionNamespace getVariable format ["ai_section_%1", _side_char]) select 2;_unitliste = _list;};
+	case "tank_section": {_list = (missionNamespace getVariable format ["ai_section_%1", _side_char]) select 0;_unitliste = _list};
+	case "apc_section": {_list = (missionNamespace getVariable format ["ai_section_%1", _side_char]) select 1;_unitliste = _list};
+	case "tank_aa_platoon": {_list = (missionNamespace getVariable format ["ai_section_%1", _side_char]) select 2;_unitliste = _list};
 	
 
 	//case "heli": {_list = missionNamespace getVariable format ["ai_allmen_%1",_side_char];_unitliste = _list call tcb_fnc_RandomArrayVal};

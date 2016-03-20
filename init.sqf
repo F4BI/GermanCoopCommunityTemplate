@@ -46,6 +46,12 @@ setTerrainGrid 3.25;
 setViewDistance __GECO_VIEWDISTANCE__;
 #endif
 
+#ifdef __GECO_DEFAULT_REVIVE_SYSTEM__
+call compile preprocessFileLineNumbers "core\modules\far_revive\FAR_revive_init.sqf";
+#endif
+
+call compileFinal preprocessFileLineNumbers (TK_PATH +"tk_init.sqf");
+
 // post-init area:
 [] spawn {
 	enableRadio false;

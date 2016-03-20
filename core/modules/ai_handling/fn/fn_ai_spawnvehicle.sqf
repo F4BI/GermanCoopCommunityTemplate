@@ -52,7 +52,15 @@ if (_sim in ["AIRPLANE", "HELICOPTER", "AIRPLANEX", "HELICOPTERX"]) then {
 	if (random 100 > 50) then {_veh allowCrewInImmobile true};
 };
 
-ai_zeus_logic addCuratorEditableObjects [[_veh],true];
+// add to curator if existing and check the locality
+if (count allCurators > 0) then {
+	if (isServer) then {
+		[_veh] call tcb_fnc_ai_addToCuratorLogics;
+	} else {	// headless client
+		["addToCuratorLogics", _veh] call tcb_fnc_ai_netCallEventCTS;
+	};
+};
+
 _veh setVariable ["x_ke", 1, true];
 _veh addMPEventHandler ["MPKilled", {if (isServer) then {_this call tcb_fnc_ai_handleDeadVec}}];
 _veh setDir _azi;
