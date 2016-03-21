@@ -2,9 +2,10 @@
 // Hier wird das Arsenal Loadout definiert welches in die Kisten geladen wird.
 // Das Script wird lokal von jedem Client ausgeführt
 // standard definitions - do not edit
-private ["_items", "_optics", "_arifle", "_srifle", "_mg", "_handgun", "_launcher"];
+private ["_items", "_optics", "_arifle", "_srifle", "_mg", "_handgun", "_launcher", "_ar_mags", "_sr_mags", "_mg_mags", "_shells"];
 tcb_all_items = [];
 tcb_all_weaps = [];
+tcb_all_mags = [];
 
 // Rucksäcke, Westen,, Magazine und Brillen werden automatisch hinzugefügt. (braucht man sich nicht drum kümmern)
 // nur Waffen und besondere Gegenstände definieren (z.B. Scopes und andere Attachments usw)
@@ -25,51 +26,71 @@ switch (playerSide) do {
 		// BLUFOR equipment
 		_items = ["U_B_PilotCoveralls","U_B_Wetsuit","U_B_HeliPilotCoveralls","U_B_GhillieSuit","U_B_CombatUniform_mcam_vest","U_B_CombatUniform_mcam","H_HelmetB","H_HelmetB_camo","H_HelmetB_paint","H_HelmetB_light","H_Booniehat_mcamo","H_HelmetB_plain_mcamo","H_HelmetB_plain_blk","H_HelmetSpecB","H_HelmetSpecB_paint1","H_HelmetSpecB_paint2","H_HelmetSpecB_blk","H_HelmetB_grass","H_HelmetB_snakeskin","H_HelmetB_desert","H_HelmetB_black","H_HelmetB_sand","H_Cap_blu","H_Cap_brn_SPECOPS","H_Cap_tan_specops_US","H_Cap_khaki_specops_UK","H_HelmetCrew_B","H_PilotHelmetFighter_B","H_PilotHelmetHeli_B","H_CrewHelmetHeli_B","H_MilCap_mcamo","H_HelmetB_light_grass","H_HelmetB_light_snakeskin","H_HelmetB_light_desert","H_HelmetB_light_black","H_HelmetB_light_sand","H_BandMask_khk","H_BandMask_reaper","H_BandMask_demon","H_Beret_blk","H_Beret_grn_SF","H_Beret_02","H_Beret_Colonel","B_UavTerminal"];
 		_optics = ["optic_tws_mg","optic_tws","optic_NVS","optic_Holosight_smg","optic_Holosight","optic_Aco_smg","optic_Aco","optic_Hamr","optic_Arco","optic_SOS","optic_MRD"];
-
+		// BLUFOR weapons
 		_arifle = ["SMG_01_F","arifle_MXC_F","arifle_MX_F","arifle_MXM_Black_F","arifle_MX_Black_F","arifle_MXC_Black_F","arifle_MX_GL_F","arifle_MX_GL_Black_F"];
 		_srifle = ["srifle_EBR_F","srifle_LRR_F"];
 		_mg = ["LMG_Mk200_F","arifle_MX_SW_F","arifle_MX_SW_Black_F"];
 		_handgun = ["hgun_Pistol_heavy_01_F","hgun_P07_F","hgun_ACPC2_F"];
 		_launcher = ["launch_B_Titan_F","launch_B_Titan_short_F","launch_NLAW_F"];
+		// BLUFOR mags (for every class - needed for ammo bearers)
+		_ar_mags = ["20Rnd_556x45_UW_mag","30Rnd_65x39_caseless_mag","30Rnd_65x39_caseless_mag_Tracer","100Rnd_65x39_caseless_mag","100Rnd_65x39_caseless_mag_Tracer"];
+		_sr_mags = ["10Rnd_338_Mag","20Rnd_762x51_Mag","7Rnd_408_Mag"];
+		_mg_mags = ["200Rnd_65x39_cased_Box","200Rnd_65x39_cased_Box_Tracer","130Rnd_338_Mag"];
+		_shells = ["NLAW_F","Titan_AP","Titan_AT","Titan_AA","1Rnd_HE_Grenade_shell","3Rnd_HE_Grenade_shell"];
 	};
 
 	case (opfor) : {
 		// OPFOR equipment
 		_items = ["H_MilCap_oucamo","U_O_OfficerUniform_ocamo","U_O_SpecopsUniform_blk","U_O_SpecopsUniform_ocamo","U_O_CombatUniform_oucamo","U_O_Wetsuit","U_O_PilotCoveralls","U_O_GhillieSuit","U_O_CombatUniform_ocamo","H_Cap_red","H_HelmetCrew_O","H_PilotHelmetFighter_O","H_PilotHelmetHeli_O","H_CrewHelmetHeli_O","H_HelmetO_ocamo","H_HelmetLeaderO_ocamo","H_MilCap_ocamo","H_MilCap_rucamo","H_HelmetO_oucamo","H_HelmetLeaderO_oucamo","H_HelmetSpecO_ocamo","H_HelmetSpecO_blk","H_Beret_red","H_Beret_brn_SF","H_Beret_ocamo","O_UavTerminal"];
 		_optics = ["optic_tws_mg","optic_tws","optic_DMS","optic_ACO_grn_smg","optic_ACO_grn","optic_Yorris","optic_LRPS","optic_Nightstalker"];
-
+		// OPFOR weapons
 		_arifle = ["SMG_02_F","arifle_Katiba_F","arifle_Katiba_C_F","arifle_Katiba_GL_F"];
 		_srifle = ["srifle_GM6_F","srifle_DMR_01_F"];
 		_mg = ["LMG_Zafir_F"];
 		_handgun = ["hgun_Rook40_F","hgun_ACPC2_F","hgun_Pistol_heavy_02_F"];
 		_launcher = ["launch_O_Titan_F","launch_O_Titan_short_F","launch_RPG32_F"];
+		// OPFOR mags (for every class - needed for ammo bearers)
+		_ar_mags = ["20Rnd_556x45_UW_mag","30Rnd_556x45_Stanag","30Rnd_556x45_Stanag_Tracer_Red","30Rnd_65x39_caseless_green","30Rnd_65x39_caseless_green_mag_Tracer"];
+		_sr_mags = ["20Rnd_762x51_Mag","10Rnd_127x54_Mag","10Rnd_93x64_DMR_05_Mag","10Rnd_762x54_Mag","5Rnd_127x108_Mag","5Rnd_127x108_APDS_Mag"];
+		_mg_mags = ["150Rnd_93x64_Mag","150Rnd_762x54_Box","150Rnd_762x54_Box_Tracer"];
+		_shells = ["RPG32_F","RPG32_HE_F","Titan_AP","Titan_AT","Titan_AA","1Rnd_HE_Grenade_shell"];
 	};
 
 	case (independent) : {
 		// INDFOR equipment
 		_items = ["U_I_Wetsuit","U_I_OfficerUniform","U_I_GhillieSuit","U_I_HeliPilotCoveralls","U_I_pilotCoveralls","U_I_CombatUniform_shortsleeve","U_I_CombatUniform","H_Booniehat_indp","H_Booniehat_dgtl","H_HelmetIA","H_HelmetIA_net","H_HelmetIA_camo","H_Cap_grn","H_HelmetCrew_I","H_PilotHelmetFighter_I","H_PilotHelmetHeli_I","H_CrewHelmetHeli_I","H_MilCap_dgtl","H_Beret_grn","I_UavTerminal"];
 		_optics = ["optic_ACO_grn_smg","optic_ACO_grn","optic_NVS","optic_SOS"];
-
+		// INDFOR weapons
 		_arifle = ["hgun_PDW2000_F","arifle_TRG20_F","arifle_TRG21_GL_F","arifle_Mk20_F","arifle_Mk20C_F","arifle_Mk20_GL_"];
 		_srifle = ["","srifle_GM6_F"];
 		_mg = ["LMG_Mk200_F"];
 		_handgun = ["hgun_ACPC2_F"];
 		_launcher = ["launch_I_Titan_F","launch_I_Titan_short_F","launch_NLAW_F"];
+		// INDFOR mags (for every class - needed for ammo bearers)
+		_ar_mags = ["20Rnd_556x45_UW_mag","30Rnd_556x45_Stanag","30Rnd_556x45_Stanag_Tracer_Yellow"];
+		_sr_mags = ["5Rnd_127x108_Mag","5Rnd_127x108_APDS_Mag","20Rnd_762x51_Mag"];
+		_mg_mags = ["","200Rnd_65x39_cased_Box","200Rnd_65x39_cased_Box_Tracer"];
+		_shells = ["RPG32_F","RPG32_HE_F","Titan_AP","Titan_AT","Titan_AA","1Rnd_HE_Grenade_shell","NLAW_F"];
 	};
 
 	case (independent) : {
 		// Civilian specific equipment (clothes)
 		_items = ["U_NikosAgedBody","U_C_Scientist","U_C_Journalist","U_C_HunterBody_grn","U_C_Fisherman","U_C_Farmer","U_C_FishermanOveralls","U_BG_leader","U_OG_Guerilla3_2","U_OG_Guerilla3_1","U_BG_Guerilla2_2","U_BG_Guerilla2_1","U_BG_Guerilla1_1","U_IG_leader","U_IG_Guerilla3_1","U_IG_Guerilla2_3","U_IG_Guerilla2_2","U_IG_Guerilla2_1","U_IG_Guerilla1_1","U_Rangemaster","U_C_Commoner1_1","U_C_Poloshirt_salmon","U_C_Poloshirt_tricolour","U_C_Poloshirt_stripped","U_C_Poloshirt_blue","H_RacingHelmet_1_blue_F","U_C_Driver_1_yellow","U_C_Driver_1_orange","U_Marshal","H_RacingHelmet_1_F","H_RacingHelmet_2_F","H_RacingHelmet_3_F","H_RacingHelmet_4_F","H_RacingHelmet_1_black_F","H_RacingHelmet_1_green_F","H_RacingHelmet_1_red_F","H_Cap_marshal","H_RacingHelmet_1_orange_F","H_RacingHelmet_1_yellow_F","H_RacingHelmet_1_white_F","H_TurbanO_blk","H_StrawHat","H_StrawHat_dark","H_Hat_blue","H_Booniehat_grn","H_Cap_tan","H_Cap_blk","H_Cap_blk_CMMG","H_Cap_grn_BI","H_Cap_blk_Raven","H_Cap_blk_ION","H_Cap_press","H_Bandanna_surfer","H_Beret_blk_POLICE"];
 		_optics = [];
-
+		// Civilian weapons
 		_arifle = [];
 		_srifle = [];
 		_mg = [];
 		_handgun = [];
 		_launcher = [];
+		// Civilian mags (for every class - needed for ammo bearers)
+		_ar_mags = [];
+		_sr_mags = [];
+		_mg_mags = [];
+		_shells = [];
 	};
 	default {
-	// need for virtual entities
+		// need for virtual entities
 		_items = [];
 		_optics = [];
 
@@ -77,12 +98,14 @@ switch (playerSide) do {
 		_srifle = [];
 		_mg = [];
 		_handgun = [];
-		_launcher = [];	
+		_launcher = [];
+		
+		_ar_mags = [];
+		_sr_mags = [];
+		_mg_mags = [];
+		_shells = [];
 	};
 };
-
-
-
 
 
 
@@ -94,9 +117,9 @@ switch (playerSide) do {
 //			Do not edit below this line!!!!!!
 // ----------------------------------------------------------------------------------------------------------------------------------------------
 
-
 {tcb_all_items append _x} forEach [_items, _optics];
 {tcb_all_weaps append _x} forEach [_arifle, _srifle, _mg, _handgun, _launcher];
+//{tcb_all_mags append _x} forEach [_ar_mags, _sr_mags, _mg_mags, _shells];
 
 // all magazines without any faction relations, ARSENAL search automaticaly for the matched ammo
 /*	<---- psycho: not needed i guess. Maybe add manually some standard mags for mg's / sniper / at - so ammo bearer can get strange ammo types for their comrades
@@ -165,6 +188,6 @@ geco_arsenal_crates = geco_arsenal_crates - [Nil];
 	[_x, tcb_all_weaps] call BIS_fnc_addVirtualWeaponCargo;
 	[_x, tcb_bp_a] call BIS_fnc_addVirtualBackpackCargo;
 	[_x, tcb_all_items] call BIS_fnc_addVirtualItemCargo;
-	//[_x, tcb_mag_a] call BIS_fnc_addVirtualMagazineCargo;
+	//[_x, tcb_all_mags] call BIS_fnc_addVirtualMagazineCargo;
 
 } forEach geco_arsenal_crates;
