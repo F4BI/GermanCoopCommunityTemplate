@@ -61,14 +61,14 @@ tcb_spectator_playerNames = [
 ];
 
 // wenn nicht auskommentiert mit // wird das Arsenal Preset für die definierten Kisten geladen
-#define __GECO_ARSENAL__
-// trage hier die Kisten/Gegenstände ein welche als Arsenal zur Verfügung stehen sollen
-// trage den Variablennamen der Kiste so wie im Editor benannt ein
-// der Inhalt des Arsenals wird hier definiert: ---> core\script\arsenal_preset.sqf
-geco_arsenal_crates = [
-	geco_box_1,
-	geco_box_2
-];
+// #define __GECO_ARSENAL__
+// // trage hier die Kisten/Gegenstände ein welche als Arsenal zur Verfügung stehen sollen
+// // trage den Variablennamen der Kiste so wie im Editor benannt ein
+// // der Inhalt des Arsenals wird hier definiert: ---> core\script\arsenal_preset.sqf
+// geco_arsenal_crates = [
+	// geco_box_1,
+	// geco_box_2
+// ];
 
 // wenn nicht auskommentiert mit // wird ein integriertes Revive System geladen - deaktivieren wenn ein eigenes/anderes System verwendet werden soll
 // wenn aktiviert dann:
@@ -99,7 +99,7 @@ tcb_crew = ["I_crew_F","O_crew_F","B_crew_F"];
 
 //-------------------------------------------------------------------------- AI Settings --------------------------------------------------------------------------
 // main enemy side (east, west, resistance)
-tcb_enemy = opfor;
+tcb_enemy = west;
 
 // if true, unit hasn't  NVGoggles
 tcb_remove_nv = false;
