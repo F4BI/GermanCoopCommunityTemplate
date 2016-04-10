@@ -11,7 +11,7 @@ _bool = (_storage select 7);
 if (!_bool && (_num < 3)) then {
 	"You have leaved the captcha dialog before you have passed them." call TKfSystemChat;
 	sleep 3;
-	if (vehicle player != player) then {
+	if (!(isNull objectParent player)) then {
 		moveOut player;
 	};
 	sleep 1;

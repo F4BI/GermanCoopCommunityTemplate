@@ -34,8 +34,8 @@ if !((isClass (configFile >> "CfgPatches" >> "cba_ee")) && ((isClass (configFile
 
 if (difficultyEnabled "3rdPersonView") then {
 	addMissionEventHandler ["Draw3D", {
-		if ((cameraView == "EXTERNAL") && {vehicle player == player}) then {
-			vehicle player switchCamera "INTERNAL";
+		if ((cameraView == "EXTERNAL") && {isNull objectParent player}) then {
+			player switchCamera "INTERNAL";
 		};
 	}];
 };
@@ -43,9 +43,10 @@ if (difficultyEnabled "3rdPersonView") then {
 if (tcb_b_check_pilot == 1) then {
 	if (!(typeOf player in tcb_pilots)) then {
 		addMissionEventHandler ["Draw3D", {
-			if ((vehicle player) isKindOf "Air" && player == assignedDriver (vehicle player) || {player == (vehicle player) turretUnit [0] && (vehicle player) isKindOf "Air"}) then {
-				if (!(typeOf (vehicle player) in ["Steerable_Parachute_F", "NonSteerable_Parachute_F"])) then {
-					player action ["GetOut",vehicle player];
+			_vec = vehicle player;
+			if (_vec isKindOf "Air" && player == assignedDriver _vec || {player == _vec turretUnit [0] && _vec isKindOf "Air"}) then {
+				if (!(typeOf _vec in ["Steerable_Parachute_F", "NonSteerable_Parachute_F"])) then {
+					player action ["GetOut", _vec];
 					TitleRsc ["only_pilots", "plain", 0.5];
 				};
 			};
@@ -57,9 +58,10 @@ if (isNil "geco_not_only_crew") then {
 	if (tcb_b_check_crew == 1) then {
 		if (!(typeOf player in tcb_crew)) then {
 			addMissionEventHandler ["Draw3D", {
-				if (player == driver (vehicle player)) then {
-					if ((vehicle player) isKindOf "Tank") then {
-						player action ["GetOut",vehicle player];
+				_vec = vehicle player;
+				if (player == driver _vec) then {
+					if (_vec isKindOf "Tank") then {
+						player action ["GetOut", _vec];
 						TitleRsc ["only_crew", "plain", 0.5];
 					};
 				};

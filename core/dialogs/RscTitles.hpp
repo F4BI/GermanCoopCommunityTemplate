@@ -7,7 +7,7 @@
 		objects[] = {};
 		duration = 1e+011;
 		name = "ais_ProgressBar";
-		onload = "_this call tcb_fnc_rev_progressBarInit;";
+		onload = "_this call tcb_far_fnc_progressBarInit;";
 
 		class controlsBackground {
 			class mpsf_progressbar_background {

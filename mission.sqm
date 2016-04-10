@@ -77,64 +77,7 @@ class CustomAttributes
 				};
 			};
 		};
-		class Attribute1
-		{
-			property="Revo_soundVolume";
-			expression="				if (!(is3den)) then				{					[0,_value] remoteExec ['fadeSound',0,true];				};			";
-			class Value
-			{
-				class data
-				{
-					class type
-					{
-						type[]=
-						{
-							"SCALAR"
-						};
-					};
-					value=1;
-				};
-			};
-		};
-		class Attribute2
-		{
-			property="Revo_musicVolume";
-			expression="				if (!(is3den)) then				{					[0,_value] remoteExec ['fadeMusic',0,true];				};				";
-			class Value
-			{
-				class data
-				{
-					class type
-					{
-						type[]=
-						{
-							"SCALAR"
-						};
-					};
-					value=0.5;
-				};
-			};
-		};
-		class Attribute3
-		{
-			property="Revo_radioVolume";
-			expression="				if (!(is3den)) then				{					[0,_value] remoteExec ['fadeRadio',0,true];				};				";
-			class Value
-			{
-				class data
-				{
-					class type
-					{
-						type[]=
-						{
-							"SCALAR"
-						};
-					};
-					value=1;
-				};
-			};
-		};
-		nAttributes=4;
+		nAttributes=1;
 	};
 };
 class Mission

@@ -1,35 +1,5 @@
-﻿// by Xeno
-#include "tk_macros.sqf"
-tk_funcs1_compiled = false;
-
-// get a random number, floored, from count array
-// parameters: array
-// example: _randomarrayint = _myarray call XfRandomFloorArray;
-XfRandomFloorArray = {floor (random (count _this))};
-
-// get a random item from an array
-// parameters: array
-// example: _randomval = _myarray call XfRandomArrayVal;
-XfRandomArrayVal = {_this select (_this call XfRandomFloorArray)};
-
-// setup global chat logic
-if (isNil "tk_global_chat_logic") then {tk_global_chat_logic = "Logic" createVehicleLocal [0,0,0]};
-
-// display a text message over a global logic chat
-// parameters: text (without brackets)
-// example: "Hello World!" call XfGlobalChat;
-TKfGlobalChat = {TK_global_chat_logic globalChat _this};
-
-
+﻿#include "tk_macros.sqf"
 TKfSystemChat = {systemChat _this};
-
-// display a text message over side chat
-// parameters: unit, text
-// example: [player,"Hello World!"] call XfSideChat;
-TKfSideChat = {(_this select 0) sideChat (_this select 1)};
-
-// example: [vehicle,"Hello Driver!"] call XfVehicleChat;
-TKfVehicleChat = {(_this select 0) vehicleChat (_this select 1)};
 
 TKfTKKickCheck = {
 	private ["_tk", "_storage", "_numtk", "_uid"];
@@ -123,10 +93,7 @@ TK_fcreateLog = {
 	_reason = _this select 1;
 	_uid = getPlayerUID _noob;
 	_name = name _noob;
-	_txt = format ["Name: %1 , Reason: %3 , ArmA2 UID: %2",_name,_uid,_reason];
+	_txt = format ["Name: %1 , Reason: %3 , ArmA3 UID: %2",_name,_uid,_reason];
 	player createDiaryRecord ["tk_log", [_name, _txt]];
 	diag_log ("Mission Protection System: " + _txt);
 };
-
-
-tk_funcs1_compiled = true;

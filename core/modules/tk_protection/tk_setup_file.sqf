@@ -1,6 +1,6 @@
 /*
 		---------------------------------------------Teamkill Protection Script----------------------------------------------------------
-																by Psychobastard, 2015, Version 1.10
+																by Psychobastard, 2016, Version 1.11
 
 																
 	- arbeitet präventiv - bedeutet es wird versucht dem Teamkiller / Base Raper die Möglichkeit genommen "Spass" zu haben

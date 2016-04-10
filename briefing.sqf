@@ -1,6 +1,6 @@
 ﻿_subject = player createDiarySubject ["made", "Credits"];
 player createDiaryRecord ["made", ["Mission Framework", "
-by GeCo Team, Version 1.02"]];
+by GeCo Team, Version 1.03"]];
 
 player createDiaryRecord ["made", ["German Coop Community", "
 <img image='core\img\geco_logo.paa' width='128' height='128' /><br/>

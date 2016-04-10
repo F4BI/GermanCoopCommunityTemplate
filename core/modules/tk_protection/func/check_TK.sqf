@@ -1,7 +1,6 @@
 ﻿// check for Teamkill and count them
 #include "tk_macros.sqf"
-_killer = _this select 0;
-_killed = _this select 1;
+params ["_killer","_killed"];
 
 if (isNil "_killer") exitWith {};
 if (isNull _killer) exitWith {};

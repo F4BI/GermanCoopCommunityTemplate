@@ -22,7 +22,7 @@ if (_tks >= tcb_max_num_tk || _shoots >= tcb_base_shoots) then {
 };
 _acc_time = time;
 while {time < (_acc_time + tcb_jip_vehicle_protection_time)} do {
-	waitUntil {(time > (_acc_time + tcb_jip_vehicle_protection_time)) || (vehicle player != _p)};
+	waitUntil {(time > (_acc_time + tcb_jip_vehicle_protection_time)) || (!(isNull objectParent player))};
 	_v = vehicle player;
 	if (_v != _p) then {
 		if ((_p == driver _v) || (_p == gunner _v)) then {
@@ -39,7 +39,7 @@ while {time < (_acc_time + tcb_jip_vehicle_protection_time)} do {
             disableUserInput false;
             ["tk_local_message",[_p, "Mission Protection System: You are not allow to do this at the moment."]] call TKNetCallEvent;
 		} else {
-			waitUntil {(time > (_acc_time + tcb_jip_vehicle_protection_time)) || (vehicle player == _p)};
+			waitUntil {(time > (_acc_time + tcb_jip_vehicle_protection_time)) || (isNull objectParent player)};
 		};
 	};
 	sleep 0.5;

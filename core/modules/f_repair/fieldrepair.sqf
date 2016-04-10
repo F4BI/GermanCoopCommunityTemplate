@@ -151,7 +151,7 @@ zlt_prc_repairvehicle = {
 	if (zlt_mutexAction) exitWith {
 		STR_ANOTHER_ACTION call zlt_fnc_notify;
 	};
-	if (not alive player or (player distance _veh) > 7 or (vehicle player != player) or speed _veh > 3) exitWith {STR_REPAIR_CONDITIONS call zlt_fnc_notify;};
+	if (not alive player or {(player distance _veh) > 7} or {!(isNull objectParent player)} or {speed _veh > 3}) exitWith {STR_REPAIR_CONDITIONS call zlt_fnc_notify;};
 	_hastk = [] call zlt_fnc_hastk;
 	if ( _hastk == 0 ) exitWith {STR_NEED_TOOLKIT call zlt_fnc_notify;};
 	_repairFinished = false;
@@ -163,7 +163,7 @@ zlt_prc_repairvehicle = {
 	_vehname = getText ( configFile >> "CfgVehicles" >> typeOf(_veh) >> "displayName");
 	_length = _maxlength;
 	_cycle = 0;
-	while {alive player and (player distance _veh) < 7 and (vehicle player == player) and speed _veh < 3 and not _repairFinished and zlt_mutexAction and (_cycle < 3 or (["medic",animationState player] call BIS_fnc_inString))} do {		
+	while {alive player and (player distance _veh) < 7 and (isNull objectParent player) and speed _veh < 3 and not _repairFinished and zlt_mutexAction and (_cycle < 3 or (["medic",animationState player] call BIS_fnc_inString))} do {		
 	//	diag_log ("ANIM STATE = "+str(animationState player));	
 		(format[STR_REPAIR_MSG_STRING, _length, _vehname] ) call zlt_fnc_notify;
 		if (_length <= 0) then {_repairFinished = true;};
@@ -197,7 +197,7 @@ zlt_fnc_repair_cond = {
 	_veh = (nearestObjects [player,["LandVehicle","Air","Ship"], 7]) select 0;
 	if (isNil {_veh}) exitWith {_ret};
 	_dmged = _veh call zlt_fnc_vehicledamaged;
-	_ret = (alive player and {(player distance _veh) <= 7} and {(vehicle player == player)} and {speed _veh < 3} and {not zlt_mutexAction} and {_dmged} and {alive _veh});
+	_ret = (alive player and {(player distance _veh) <= 7} and {isNull objectParent player} and {speed _veh < 3} and {not zlt_mutexAction} and {_dmged} and {alive _veh});
 	_ret;
 };
 
@@ -217,14 +217,14 @@ zlt_fnc_heavyRepair = {
 		STR_REPAIR_TRUCK_DEPLETED call zlt_fnc_notify;
 	};
 	
-	if (not alive player or vehicle player == player or speed _veh > 3 or _veh distance _truck > 15 ) exitWith {STR_REPAIR_CONDITIONS call zlt_fnc_notify;};
+	if (!alive player or (!(isNull objectParent player)) or speed _veh > 3 or _veh distance _truck > 15 ) exitWith {STR_REPAIR_CONDITIONS call zlt_fnc_notify;};
 	
 	_repairFinished = false;
 	zlt_mutexAction = true;	
 	_maxlength = _veh getVariable["zlt_longrepairTruck",DEFAULT_FULLREPAIR_LENGTH];
 	_vehname = getText ( configFile >> "CfgVehicles" >> typeOf(_veh) >> "displayName");
 	_length = _maxlength;
-	while { alive player and alive _truck and alive _veh and vehicle _caller != _caller and speed _veh <= 3 and not _repairFinished and zlt_mutexAction and _veh distance _truck <= 15 } do {			
+	while { alive player and alive _truck and alive _veh and (!(isNull objectParent _caller)) and speed _veh <= 3 and not _repairFinished and zlt_mutexAction and _veh distance _truck <= 15 } do {			
 		(format[STR_REPAIR_MSG_STRING, _length, _vehname] ) call zlt_fnc_notify;
 		if (_length <= 0) then {_repairFinished = true;};
 		_length = _length - 1;

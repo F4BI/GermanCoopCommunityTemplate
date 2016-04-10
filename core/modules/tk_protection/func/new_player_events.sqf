@@ -1,15 +1,15 @@
 ﻿// new player set up
 #include "tk_macros.sqf"
-private ["_name","_uid","_shoots"];
-
-_name = _this select 0;
-_uid = _this select 1;
-_tks = _this select 2;
-_shoots = _this select 3;
-_jip_protection = _this select 4;
-_answer = _this select 5;
-_failed_captchas = _this select 6;
-_captcha_passed = _this select 7;
+params [
+	"_name",
+	"_uid",
+	"_tks",
+	"_shoots",
+	"_jip_protection",
+	"_answer",
+	"_failed_captchas",
+	"_captcha_passed"
+];
 
 if (serverCommandAvailable "#shutdown") exitWith {diag_log "Mission Protection System: Admin excluded from MPS"};
 

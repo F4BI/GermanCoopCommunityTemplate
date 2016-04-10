@@ -1,8 +1,9 @@
 ﻿// penalty system
 #include "tk_macros.sqf"
-private ["_noob","_reason"];
-_noob = _this select 0;
-_reason = _this select 1;
+params [
+	"_noob",
+	"_reason"
+];
 
 _storage = TcB_Ref_Point getVariable (getPlayerUID _noob);
 
