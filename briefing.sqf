@@ -1,4 +1,4 @@
-﻿_subject = player createDiarySubject ["made", "Credits"];
+._subject = player createDiarySubject ["made", "Credits"];
 player createDiaryRecord ["made", ["Mission Framework", "
 by GeCo Team, Version 1.03"]];
 
@@ -9,14 +9,11 @@ TS-IP: 81.169.153.237:9985<br/>
 Homepage: http://mini.sixbitunder.com/geco/
 "]];
 
-player createDiaryRecord ["made", ["Mapbuilding", "
-dein Name, 2016"]];
-
 _subject = player createDiarySubject ["how", "Regeln und Funktionen"];
 player createDiaryRecord ["how", ["Inhalte", "
 - Ohrstöpsel - mit linker WIN-Taste rein/raus<br/>
-- Field Repair - Mausrad (bei besch. Fahrzeug)<br/>
-- Spectating - schließen Mit Kompass- oder nachladen Taste<br/>
+- Field Repair - Mausrad auf Fahrzeug<br/>
+- Spectating - schließen mit Kompass- oder nachladen Taste<br/>
 "]];
 player createDiaryRecord ["how", ["GeCo Regeln", "
 - spiele im Team<br/>
@@ -25,12 +22,29 @@ player createDiaryRecord ["how", ["GeCo Regeln", "
 "]];
 
 //////////////////////////////////////////////////Notizen//////////////////////////////////////////////////////
-player createDiaryRecord ["diary", ["Aufgabe", "
-
-"]];
-player createDiaryRecord ["diary", ["Situation", "
-
-"]];
+player createDiaryRecord [
+	"Diary", [
+		"Situation",""
+	]
+];
+player createDiaryRecord [
+	"Diary", [
+		"Rules Of Engagement","Keine Artillerie und CAS nahe bewohnten Gebieten und wichtiger Infrastruktur.
+		<br/><br/>Sich ergebenden Feinden wird Pardon gewährt.
+		<br/><br/>Gewalt der Zivilbevölkerung gegenüber ist untersagt."
+	]
+];
 
 
 /////////////////////////////////////////////////Missionsziele/////////////////////////////////////////////////
+
+player createDiaryRecord [
+	"Diary", [
+		"Mission",""
+	]
+];
+player createDiaryRecord [
+	"Diary", [
+		"Durchführung","Wird von der Führung bestimmt."
+	]
+];
