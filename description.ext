@@ -1,17 +1,18 @@
-//author = "Psychobastard";			<--- can set in Eden editor mor comfortable
-//onLoadName = "GeCo Template";			<--- can set in Eden editor mor comfortable
-//onLoadMission = "GeCo Base Template with most standard functionality";			<--- can set in Eden editor mor comfortable
-loadScreen = "core\img\geco_logo.paa";
+//author = "Psychobastard";	<--- can be set in Eden editor more comfortable
+//onLoadName = "GeCo Template";		<--- can be set in Eden editor more comfortable
+//onLoadMission = "GeCo Base Template with most standard functionality";	<--- can be set in Eden editor more comfortable
+//loadScreen = "core\img\geco_logo.paa";	<--- can be set in Eden editor more comfortable
 onLoadIntroTime = 0;
 onLoadMissionTime = 0;
 
-respawnButton = 1;
+//respawnButton = 1;	<--- can be set in Eden editor more comfortable
 respawnDialog = 0;
-respawn = 3;
-respawndelay = 14;
+//respawn = 3;		<--- can be set in Eden editor more comfortable
+//respawndelay = 14;	<--- can be set in Eden editor more comfortable
 respawnOnStart = 0;
-//respawnTemplates[] = {"MenuPosition","Wave"};
+//respawnTemplates[] = {"MenuPosition","Wave"};		<--- can be set in Eden editor more comfortable
 
+/* can be set in Eden editor more comfortable
 corpseManagerMode = 1;
 corpseLimit = 10;
 corpseRemovalMinTime = 120;
@@ -20,35 +21,40 @@ wreckManagerMode = 1;
 wreckLimit = 10;
 wreckRemovalMiTime = 600;
 wreckRemovalMaxTime = 900;
+*/
 
-showUAVFeed = 0;
+//showUAVFeed = 0;	<--- can be set in Eden editor more comfortable
 taskManagement_markers2D = 1;
 disableChannels[] = {0};
-enableItemsDropping = 0;
-debriefing=1;
-disabledAI=1;
-joinUnassigned = 1;
-enableDebugConsole = 1;
+//enableItemsDropping = 0;	// default 0
+//debriefing=1;		<--- can be set in Eden editor more comfortable
+//disabledAI=1;		<--- can be set in Eden editor more comfortable
+//joinUnassigned = 1;	<--- can be set in Eden editor more comfortable
+//enableDebugConsole = 1;		<--- can be set in Eden editor more comfortable
 
 
 
 
 
-class Header {
+class Header
+{
 	gameType = Coop;
 	minPlayers = 1;
 	maxPlayers = 65;
 	playerCountMultipleOf = 1;
 };
 
-class Params {
-	class tcb_b_check_pilot {
+class Params
+{
+	class tcb_b_check_pilot
+	{
 		title = "only pilots can fly";
 		values[] = {0,1};
 		default = 1;
 		texts[] = {"disabled","enabled"};
 	};
-	class tcb_b_check_crew {
+	class tcb_b_check_crew
+	{
 		title = "only crewman can drive armored vehicles";
 		values[] = {0,1};
 		default = 0;
@@ -56,13 +62,17 @@ class Params {
 	};
 };
 
-class CfgFunctions {
+class CfgFunctions
+{
 	createShortcuts = 1;
 	#include "cfgFunctions.hpp"
 };
-class MissionSQM {
+
+class MissionSQM
+{
 	#include "mission.sqm"
 };
+
 #include "core\modules\tk_protection\dialogs\tkdefine.hpp"
 #include "core\modules\tk_protection\dialogs\MsgDialog.hpp"
 #include "core\dialogs\rscBasicDefines.hpp"
@@ -70,15 +80,18 @@ class MissionSQM {
 #include "core\modules\taw_vd\GUI.h"
 #include "core\modules\far_revive\far_blackscreen.hpp"
 
-class CfgDebriefing {
-	class End1 {
+class CfgDebriefing
+{
+	class End1
+	{
 		subtitle = "NATO hat die Schlacht gewonnen!";
 		description = "Die NATO Truppen eroberten weitere Gebiete in diesem Krieg.";
 		pictureBackground = "core\img\geco_logo.jpg";
 		picture = "flag_NATO";
 		pictureColor[] = {0.0,0.3,0.6,1};
 	};
-	class End6 {
+	class End6
+	{
 		title = "Mission Protection System";
 		subtitle = "You are punished by the Mission Protection System.";
 		description = "Please learn more about the rules on public servers and teamplay.";
