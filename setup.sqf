@@ -4,7 +4,7 @@
 // ------------------------------------------------- Funktionen des Templates aktivieren / deaktivieren -------------------------------------------------
 //--------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-// wenn nicht auskommentiert mit // dann legt das die Viewdistance für die Spieler und den Server fest
+// wenn nicht auskommentiert mit // dann legt das die Viewdistance fÃ¼r die Spieler und den Server fest
 #define __GECO_VIEWDISTANCE__ 2500
 
 // wenn nicht auskommentiert mit // dann kann der Spieler selbst die Sichtweite bestimmen und Gras an/abschalten
@@ -13,14 +13,15 @@
 // wenn nicht auskommentiert mit // dann startet das GeCo Standard Intro
 #define __GECO_ENABLE_INTRO__
 
-// wenn nicht auskommentiert mit // dann werden die Waffen, Magazine und Ausrüstung des Spielers zum Todeszeitpunkt gespeichert und bei respawn wieder gegeben
+// wenn nicht auskommentiert mit // dann werden die Waffen, Magazine und AusrÃ¼stung des Spielers zum Todeszeitpunkt gespeichert und bei respawn wieder gegeben
 #define __GECO_WEAPON_SAVER__
 
-// wenn nicht auskommentiert mit // dann werden für definierte Spieler Marker auf der Karte erzeugt
-// sollen alle Spieler einen Marker erhalten muß auch jeder einzeln unter dem Array tcb_p_entities definiert werden
+// wenn nicht auskommentiert mit // dann werden fÃ¼r definierte Spieler Marker auf der Karte erzeugt
+// sollen alle Spieler einen Marker erhalten muÃŸ auch jeder einzeln unter dem Array tcb_p_entities definiert werden
 // ["name des spielers als string (im editor definieren)" , "Markertext" , "Markertyp"]
 #define __GECO_SHOW_CUSTOM_PLAYERMARKER__
 tcb_p_entities = [
+	["opz","OPZ","b_hq"],
 	["alpha_lead","Alpha","b_inf"],
 	["bravo_lead","Bravo","b_inf"],
 	["charlie_lead","Charlie","b_inf"],
@@ -37,32 +38,33 @@ tcb_p_entities = [
 // wenn nicht auskommentiert mit // dann werden Blutspritzer bei Schaden erzeugt (optischer Effekt)
 #define __GECO_BLOOD_SCREEN__
 
-// wenn nicht auskommentiert mit // können leichte Reperaturen im Feld vorgenommen werden (z.B. defekten Reifen reparieren)
+// wenn nicht auskommentiert mit // kÃ¶nnen leichte Reperaturen im Feld vorgenommen werden (z.B. defekten Reifen reparieren)
 #define __GECO_FIELDREPAIR__
 
-// wenn nicht auskommentiert mit // können umgekipte Fahrzeuge wieder aufgerichtet werden
+// wenn nicht auskommentiert mit // kÃ¶nnen umgekipte Fahrzeuge wieder aufgerichtet werden
 #define __GECO_VEHILCLEFLIP__
 
-// wenn nicht auskommentiert mit // können nur Crewmitglieder schwere Fahrzeuge fahren
+// wenn nicht auskommentiert mit // kÃ¶nnen nur Crewmitglieder schwere Fahrzeuge fahren
 #define __GECO_ONLY_CREW_CAN_DRIVE__
 
-// wenn nicht auskommentiert mit // können Spectator definiert werden (z.B. der OPZ Slot)
+// wenn nicht auskommentiert mit // kÃ¶nnen Spectator definiert werden (z.B. der OPZ Slot)
 #define __GECO_SPECTATING__
-// hier werden Spieler als Spectating User definiert. Der zum Start der Mission echte eingeloggte Serveradmin erhält auomatisch Zugang zum Spectating!
+// hier werden Spieler als Spectating User definiert. Der zum Start der Mission echte eingeloggte Serveradmin erhÃ¤lt auomatisch Zugang zum Spectating!
 // trage hier Einheiten Slots ein welche Zugang zum Spectating Mode erhalten sollen (varName des spielers als string (im editor definieren))
 tcb_spectator_units = [
-	"alpha_lead",
 	"opz"
 ];
 // trage hier Spielernamen ein welche Zugang zum Spectating Mode erhalten sollen
 tcb_spectator_playerNames = [
 	"Psychobastard",
-	"blablabla"
+	"Quentin",
+	"Deathbite",
+	"Grey Wolf"
 ];
 
-// wenn nicht auskommentiert mit // wird das Arsenal Preset für die definierten Kisten geladen
+// wenn nicht auskommentiert mit // wird das Arsenal Preset fÃ¼r die definierten Kisten geladen
 #define __GECO_ARSENAL__
-// trage hier die Kisten/Gegenstände ein welche als Arsenal zur Verfügung stehen sollen
+// trage hier die Kisten/GegenstÃ¤nde ein welche als Arsenal zur VerfÃ¼gung stehen sollen
 // trage den Variablennamen der Kiste so wie im Editor benannt ein
 // der Inhalt des Arsenals wird hier definiert: ---> core\script\arsenal_preset.sqf
 geco_arsenal_crates = [
@@ -72,9 +74,9 @@ geco_arsenal_crates = [
 
 // wenn nicht auskommentiert mit // wird ein integriertes Revive System geladen - deaktivieren wenn ein eigenes/anderes System verwendet werden soll
 // wenn aktiviert dann:
-// 	können nur Medics reviven
+// 	kÃ¶nnen nur Medics reviven
 //	Zeit zum Revive: 6 Minuten
-//	Standard Einstellungen des Revive System können wenn gewünscht im Modul 	far_revive\far_revive_init.sqf 	angepasst werden
+//	Standard Einstellungen des Revive System kÃ¶nnen wenn gewÃ¼nscht im Modul 	far_revive\far_revive_init.sqf 	angepasst werden
 #define __GECO_DEFAULT_REVIVE_SYSTEM__
 
 
@@ -89,11 +91,11 @@ geco_arsenal_crates = [
 // vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv
 
 //-------------------------------------------------------------------------- Pilotenklassen --------------------------------------------------------------------------
-// hier sind alle Classnames aufgelistet, welche als Piloten definiert werden um fliegen zu dürfen
+// hier sind alle Classnames aufgelistet, welche als Piloten definiert werden um fliegen zu dÃ¼rfen
 tcb_pilots = ["I_G_Story_Protagonist_F","C_man_pilot_F","O_Pilot_F","O_helicrew_F","B_helicrew_F","B_Pilot_F","I_pilot_F","I_helicrew_F","I_helipilot_F","O_helipilot_F","B_Helipilot_F"];
 //-------------------------------------------------------------------------- Crewklassen --------------------------------------------------------------------------
 #ifdef __GECO_ONLY_CREW_CAN_DRIVE__
-// hier sind alle Classnames aufgelistet, welche als Crew definiert werden um gepanzerte Fahrzeuge fahren zu dürfen (und Schützenposition)
+// hier sind alle Classnames aufgelistet, welche als Crew definiert werden um gepanzerte Fahrzeuge fahren zu dÃ¼rfen (und SchÃ¼tzenposition)
 tcb_crew = ["I_crew_F","O_crew_F","B_crew_F"];
 #endif
 
