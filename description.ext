@@ -1,18 +1,17 @@
-//author = "Psychobastard";	<--- can be set in Eden editor more comfortable
-//onLoadName = "GeCo Template";		<--- can be set in Eden editor more comfortable
-//onLoadMission = "GeCo Base Template with most standard functionality";	<--- can be set in Eden editor more comfortable
-//loadScreen = "core\img\geco_logo.paa";	<--- can be set in Eden editor more comfortable
+author = "Fabi,Psychobastard";	
+onLoadName = "OP Supply";		
+onLoadMission = "Simple Supply Mission";	
+loadScreen = "core\img\geco_logo.paa";	
 onLoadIntroTime = 0;
 onLoadMissionTime = 0;
 
-//respawnButton = 1;	<--- can be set in Eden editor more comfortable
+respawnButton = 1;	
 respawnDialog = 0;
-//respawn = 3;		<--- can be set in Eden editor more comfortable
-//respawndelay = 14;	<--- can be set in Eden editor more comfortable
+respawn = 3;		
+respawndelay = 14;	
 respawnOnStart = 0;
-//respawnTemplates[] = {"MenuPosition","Wave"};		<--- can be set in Eden editor more comfortable
+respawnTemplates[] = {"MenuPosition","Wave"};		
 
-/* can be set in Eden editor more comfortable
 corpseManagerMode = 1;
 corpseLimit = 10;
 corpseRemovalMinTime = 120;
@@ -21,16 +20,16 @@ wreckManagerMode = 1;
 wreckLimit = 10;
 wreckRemovalMiTime = 600;
 wreckRemovalMaxTime = 900;
-*/
 
-//showUAVFeed = 0;	<--- can be set in Eden editor more comfortable
+
+showUAVFeed = 0;	
 taskManagement_markers2D = 1;
 disableChannels[] = {0};
-//enableItemsDropping = 0;	// default 0
-//debriefing=1;		<--- can be set in Eden editor more comfortable
-//disabledAI=1;		<--- can be set in Eden editor more comfortable
-//joinUnassigned = 1;	<--- can be set in Eden editor more comfortable
-//enableDebugConsole = 1;		<--- can be set in Eden editor more comfortable
+enableItemsDropping = 0;	// default 0
+debriefing=1;		
+disabledAI=1;		
+joinUnassigned = 1;	
+enableDebugConsole = 1;		
 
 
 
@@ -66,6 +65,7 @@ class CfgFunctions
 {
 	createShortcuts = 1;
 	#include "cfgFunctions.hpp"
+    #include "Scripts\AME\cfgFunctions.hpp"
 };
 
 class MissionSQM

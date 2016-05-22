@@ -1,4 +1,4 @@
-._subject = player createDiarySubject ["made", "Credits"];
+_subject = player createDiarySubject ["made", "Credits"];
 player createDiaryRecord ["made", ["Mission Framework", "
 by GeCo Team, Version 1.03"]];
 
@@ -24,7 +24,13 @@ player createDiaryRecord ["how", ["GeCo Regeln", "
 //////////////////////////////////////////////////Notizen//////////////////////////////////////////////////////
 player createDiaryRecord [
 	"Diary", [
-		"Situation",""
+		"Situation","Die Besetzung der Insel Altis in den letzten Monaten ging gut vor ran.
+        <br/>Wir konnten in den letzten Wochen am Altis Airport unsere FOB aufbauen und mit Ausrüstung versehen.
+        <br/>Da die zivile Bevölkerung wenig von unserem Aufenthalt hält und von den Strapazen des Krieges nur langsam erholt, hat das HQ Versorgungsgütern angefordert.
+        <br/>Das HQ erhofft sich die Bevölkerung durch die Versorgung mit Lebensmitteln und Kleidung friedlich zu stimmen.
+        <br/>
+        <br/>Heute morgen sind mehrere C130 mit den angeforderten Versorgungsgütern auf dem Airfield gelandet.
+        <br/>Die Ladung steht in den Hangars zur Verteilung bereit."
 	]
 ];
 player createDiaryRecord [
@@ -40,8 +46,12 @@ player createDiaryRecord [
 
 player createDiaryRecord [
 	"Diary", [
-		"Mission",""
-	]
+		"Mission","Ihr heutiger Auftrag wird die Verteilung der Hilfsgüter auf dem südöstlichen Teil der Insel.
+        <br/>Die Städte Telos, Charkia und Pyrgos sowie die Dörfer Dorida, Chalkeia, Ekall, Panagia, Feres und Selakano sollen jeweils 1 Container erhalten.
+        <br/>Damit ergibt sich ein Konvoi aus 9 Tonnern. 
+        <br/>Wir erwarten zwar keinen Feinkontakt allerdings ist uns zu Ohren gekommen das sich in der Bevölkerung extreme Gruppierungen bilden sollen. 
+        <br/>Damit die Aktion ohne Komplikationen über die Bühne geht, wird die komplette GeCo Kompanie den Auftrag übernehmen. 
+        <br/>Zur Verlegung der begleitenden Infanterie stehen ihnen 2 bewaffnete MRAP und mehrere Tonner mit Pritsche zur Verfügung."	]
 ];
 player createDiaryRecord [
 	"Diary", [
