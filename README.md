@@ -1,7 +1,7 @@
 Hier liegt das Template für die GermanCoopCommunity
 
 
-
+// noch aktuell?
 20:28:24 Error in expression <ogressBar_gui_bg") select 2;
 _newval = (_maxWidth * (_value min 1) ) max 0.02;
 _>
@@ -18,3 +18,6 @@ _pos set [2,0.02];
 (uiNamespace getVari>
 20:28:28   Error Nicht definierte Variable in Ausdruck: _pos
 20:28:28 File mpmissions\__CUR_MP.Altis\core\modules\far_revive\func\fn_rev_progressBar.sqf, line 54
+
+// Quentin, 28.5.16
+Rechtschreibkorrektur "Spactator Mode" zu "Spectator Mode"
