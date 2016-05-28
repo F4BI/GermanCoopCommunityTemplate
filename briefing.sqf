@@ -1,4 +1,4 @@
-._subject = player createDiarySubject ["made", "Credits"];
+_subject = player createDiarySubject ["made", "Credits"];
 player createDiaryRecord ["made", ["Mission Framework", "
 by GeCo Team, Version 1.03"]];
 
