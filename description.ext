@@ -100,3 +100,7 @@ class CfgDebriefing
 		//pictureColor[] = {};
 	};
 };
+/*
+ * Dialogs
+ */
+#include "Scripts\AME\BarDlg.hpp"
