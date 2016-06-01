@@ -46,6 +46,7 @@ class tcb {
 	class server {
 		file = "core\func\server";
 		addf(addToCuratorLogics);
+		addf(addToCuratorLoop);
 	};
 	class client {
 		file = "core\func\client";

@@ -18,16 +18,9 @@ if (isDedicated) then {
 	};
 };
 
-// Zeus support
-{
-	_x addCuratorEditableObjects [(allMissionObjects "Thing"), false];
-	_x addCuratorEditableObjects [(allMissionObjects "AllVehicles"), true];
-	_x addCuratorEditableObjects [(allMissionObjects "Building"), false];
-	_x addCuratorEditableObjects [(entities "CAManBase"), false];
-	_x removeCuratorEditableObjects [(allMissionObjects "Static"), false];
-	false
-} count allCurators;
-
 {_x setvariable ["BIS_nocoreconversations",true]} foreach playableUnits;
+
+// Zeus support
+true spawn tcb_fnc_addToCuratorLoop;
 
 execVM "core\modules\ai_handling\ai_init.sqf";

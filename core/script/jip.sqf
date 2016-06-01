@@ -32,9 +32,9 @@ if !((isClass (configFile >> "CfgPatches" >> "cba_ee")) && ((isClass (configFile
 	AME_Nametag_EVH = addMissionEventHandler ["Draw3D", {_this call tcb_fnc_NameTags}];
 };
 
-if (difficultyEnabled "3rdPersonView") then {
+if (difficultyOption "thirdPersonView" == 1) then {
 	addMissionEventHandler ["Draw3D", {
-		if ((cameraView == "EXTERNAL") && {isNull objectParent player}) then {
+		if ((cameraView isEqualTo "EXTERNAL") && {isNull objectParent player}) then {
 			player switchCamera "INTERNAL";
 		};
 	}];

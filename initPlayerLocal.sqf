@@ -63,7 +63,7 @@ tcb_isSpectator = false;
 #ifdef __GECO_SPECTATING__
 _isAdmin = if (serverCommandAvailable "#shutdown") then {true} else {false};
 if (str(player) in tcb_spectator_units || {(name player) in tcb_spectator_playerNames} || {_isAdmin} || {getPlayerUID player == "76561197998124797"}) then {
-	player addAction ["Spactator Mode" call XTuerkiesText, "call tcb_fnc_spectating", [], 0, false, true, "", ""];
+	player addAction ["Spectator Mode" call XTuerkiesText, "call tcb_fnc_spectating", [], 0, false, true, "", ""];
 	tcb_isSpectator = true;
 };
 #endif

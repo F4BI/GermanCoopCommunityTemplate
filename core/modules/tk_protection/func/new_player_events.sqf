@@ -40,9 +40,9 @@ if (tcb_base_shoots > 0) then {
 		if (_inBase) then {
 			if !(getText (configFile >> "CfgAmmo" >> (_this select 4) >> "Simulation") in ["shotSmoke","shotIlluminating","shotNVGMarker","shotCM","shotTimeBomb","shotMine","shotPipeBomb"]) then {
 				_shoots = [_this select 0] call TKfcount_Shoots;
-				if ((_this select 4) isKindOf "GrenadeCore") then {
-					if (count _this > 6) then {deleteVehicle (_this select 6)};
-				};
+				//if ((_this select 4) isKindOf "GrenadeCore") then {
+					deleteVehicle (_this select 6);
+				//};
 				["tk_local_message",[_this select 0, "Mission Protection System: Please stop shooting at base or you will be punished."]] call TKNetCallEvent;
 				if (_shoots >= tcb_base_shoots) then {[_this select 0, "Shooting at Base"] call get_Penalty};
 			};
