@@ -12,14 +12,13 @@ if ( (date select 3) < 4 || (date select 3) >= 20 ) then { camUseNVG true; } els
 _cam camSetTarget _camobj;
 
 _dialog = createDialog "far_blackscreen";
-/*0 fadesound 0;
+//0 fadesound 0;
 
 [] spawn {
 	sleep 3.5;
 	3 fadesound 1;
 	titleText  [ "" ,"BLACK IN",3];
 };
-*/
 
 "filmGrain" ppEffectAdjust [0.3, 2, 4, 0.5, 0.5, true];
 "filmGrain" ppEffectCommit 0;
@@ -41,9 +40,7 @@ _cam camSetPos _destpos;
 _cam camCommit 1800;
 
 
-//waitUntil {(player getVariable "FAR_isUnconscious") == 1};
-_time = time + 12;
-waitUntil {opt_far_hideBlackScreen || time > _time};
+waitUntil {(player getVariable "FAR_isUnconscious") == 1};
 closeDialog 0;
 waitUntil {!dialog};
 
